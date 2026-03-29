@@ -8,13 +8,11 @@
     <title>Vr project</title>
   </head>
   <body>
-    <a-scene>
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-entity geometry="" material="" position="0.14012 0.39465 -1.81773"></a-entity>
-      <a-sky color="#ECECEC"></a-sky>
+    <a-scene light="defaultLightsEnabled: false">
+      <a-entity geometry="" material="" position="0.14012 0.39465 -1.81773" id="TestBox"></a-entity>      <a-sky color="#ECECEC" material="color: #4d4d4d" id="sky"></a-sky>
+      <a-entity light="color: #BBB; type: ambient" data-aframe-default-light="" aframe-injected="" id="LightAmbient"></a-entity>
+      <a-entity light="intensity: 1.884; castShadow: true" position="-0.5 1 1" data-aframe-default-light="" aframe-injected="" id="LightDirectional"></a-entity>
+      <a-entity camera="active: true" position="0 1.6 0" wasd-controls="" look-controls="" id="MainCam"></a-entity>
     </a-scene>
     <script src="./script.js"></script>
   </body>
