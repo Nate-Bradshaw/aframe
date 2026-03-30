@@ -10,15 +10,18 @@ aframe-watcher index.html
     <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
     <script src="script.js"></script>
     <script src="components\log.js"></script>
+    <script src="components\beatAnim.js"></script>
     <title>Vr project</title>
   </head>
   <body>
     <a-scene log="foobar" light="defaultLightsEnabled: false" keyboard-shortcuts="" screenshot="" xr-mode-ui="" device-orientation-permission-ui="" id="Scene">
-      <a-entity geometry="" material="" position="0.14012 0.39465 -1.81773" id="TestBox"></a-entity>
       <a-sky color="#ECECEC" material="color: #4d4d4d" id="sky"></a-sky>
       <a-entity class="lights" light="color: #BBB; type: ambient" data-aframe-default-light="" aframe-injected="" id="LightAmbient"></a-entity>
       <a-entity class="lights" light="intensity: 1.884; castShadow: true" position="-0.5 1 1" data-aframe-default-light="" aframe-injected="" id="LightDirectional"></a-entity>
       <a-entity camera="active: true" position="0 1.6 0" wasd-controls="" look-controls="" id="MainCam"></a-entity>
+      <a-entity geometry="primitive: ring; radiusInner: 1.12; segmentsPhi: 10; segmentsTheta: 64; thetaLength: 360" material="color: #ff9494" id="StaticRing" position="0 1.5 -2"></a-entity>
+    
+      <a-entity id="BeatSquare" geometry="primitive: plane" material="color: #86e0fe" position="-1 1.6 -5" animation="property: position; to: 1 8 -10; dur: 2000; easing: linear; loop: true" ></a-entity>
     </a-scene>
   </body>
 </html>
