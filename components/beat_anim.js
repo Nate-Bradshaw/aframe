@@ -1,4 +1,4 @@
-AFRAME.registerComponent('beatAnim', {
+AFRAME.registerComponent('beat_anim', {
     //https://aframe.io/docs/1.7.0/core/component.html
     
     // idea behind this is to move a beat object from a start pos to the edge of a ring
@@ -8,14 +8,17 @@ AFRAME.registerComponent('beatAnim', {
     
     //see property types in component docs, can do custom types
     schema: {
-        message: {type: 'string', default: 'Hello, World!'},
-        startPos: {type: 'vec3', default: { x: 0, y: 0, z: 0 }}
+        startPos: {type: 'vec3'},
+        ring: {type: 'selector'}, //this should be the ring where the notes need to go
+        angle: {type: 'number'} //float
+        //note on angle, this will be what we want the LOCAL angle to be
+        //global angle calculations will need to be made
         //this.data.startPos = {0,1,2}
         //this.data.startPos.x = 0 //ect...
     },
 
     init: function () {
-        console.log(this.data.message);
+        this.el.setAttribute("position", this.data.startPos)
     },
 
     tick: function () {

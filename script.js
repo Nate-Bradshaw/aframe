@@ -6,8 +6,5 @@
 
 var sceneEl = document.querySelector("a-scene"); //grabbing scene object
 console.log(sceneEl);
-var el = sceneEl.querySelector("#TestBox"); //grabbing an entity by tag
+//var el = sceneEl.querySelector("#TestBox"); //grabbing an entity by tag
 //var camera = document.querySelector('a-entity[camera]').components.camera.camera;
-
-console.log(el)
-console.log(el.position)

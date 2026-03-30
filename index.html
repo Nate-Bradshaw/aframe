@@ -10,7 +10,7 @@ aframe-watcher index.html
     <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
     <script src="script.js"></script>
     <script src="components\log.js"></script>
-    <script src="components\beatAnim.js"></script>
+    <script src="components\beat_anim.js"></script>
     <title>Vr project</title>
   </head>
   <body>
@@ -21,7 +21,7 @@ aframe-watcher index.html
       <a-entity camera="active: true" position="0 1.6 0" wasd-controls="" look-controls="" id="MainCam"></a-entity>
       <a-entity geometry="primitive: ring; radiusInner: 1.12; segmentsPhi: 10; segmentsTheta: 64; thetaLength: 360" material="color: #ff9494" id="StaticRing" position="0 1.5 -2"></a-entity>
     
-      <a-entity id="BeatSquare" geometry="primitive: plane" material="color: #86e0fe" position="-1 1.6 -5" animation="property: position; to: 1 8 -10; dur: 2000; easing: linear; loop: true" ></a-entity>
+      <a-entity id="BeatSquare" beat_anim="startPos: 0 1.5 -5 ring: #StaticRing; angle: 1" geometry="primitive: plane" material="color: #86e0fe"></a-entity>
     </a-scene>
   </body>
 </html>
