@@ -8,8 +8,8 @@ aframe-watcher index.html
     <!-- <link rel="stylesheet" href="./style.css">  -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
-    <script src="script.js"></script>
-    <script src="components\log.js"></script>
+    <!-- <script src="script.js"></script>
+    <script src="components\log.js"></script> -->
     <script src="menu.js"></script>
     <title>Vr project</title>
   </head>
@@ -47,7 +47,7 @@ aframe-watcher index.html
 
       <!-- The interactive box -->
       <a-box
-        id="btn"
+        id="switch-button"
         class="clickable"
         position="0 1.5 -3"
         depth="0"
@@ -62,24 +62,46 @@ aframe-watcher index.html
         height="2"
         width="3"
         depth="0"
-        color="#FF0000"
+        color="#808080"
         visible="false"
       ></a-box>
 
-      <a-text id="menuText"
-       value="Menu" 
-       position="0.00369 2.699 -1.95343" 
-       align="center" 
-       width="6" 
-       color="#111"
-       visible="false"
+      <a-text 
+      id="menuText"
+      value="Menu" 
+      position="0.00369 2.699 -1.95343" 
+      align="center" 
+      width="6" 
+      color="#111"
+      visible="false"
       ></a-text>
 
-      <a-entity id="exit-button" 
-      geometry="depth: 0; height: 0.1; width: 0.1" position="1.372 2.41542 -1.993" 
-      color="#ff08bd" 
-      class="clickable"
+      <a-entity 
+      id="exit-button"
+      material="color:#FFC0CB" 
+      geometry="depth: 0; height: 0.1; width: 0.1"
+      position="1.27971 2.31821 -1.993" 
+      class="clickable" 
+      scale="3 3 1"
       visible="false"></a-entity>
+
+      <a-entity
+      id="btn" 
+      position="-1.5 1.5 -1.5" 
+      geometry="box"
+      material="color: #FF0000" 
+      scale="0.1 0.6 1.2"
+      class="clickable"></a-entity>
+
+      <a-text 
+      id="statusText-2" 
+      value="How To Play" 
+      position="-1.5 2.2 -1.45105" 
+      align="center" 
+      width="6" 
+      color="#111" 
+      value: Play Game - Test;
+      rotation="0 90 0"></a-text>
     </a-scene>
 
   </body>
