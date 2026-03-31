@@ -31,11 +31,23 @@ AFRAME.registerComponent('beat_anim', {
         var endPos = new THREE.Vector3(x, y, this.data.ring.object3D.position.z);
 
         this.step = (endPos.sub(pos)).divideScalar(this.data.dur_ticks);
-        console.log(this.step);
+        this.alphaStep = 1 / this.data.grace_ticks_post;
+        this.alpha = 1;
 
-        console.log(this.data.ring.components.geometry.data);
+        //console.log(this.data.ring.components.geometry.data);
 
         this.gazeActive = false;
+
+        this.el.addEventListener("looked_at", function(event){
+            if(gazeActive){
+                //idea here is: if looked at in the gaze window, the beat_spawner gets notified for score ect
+                //colour change for feedback
+                //! untested until gaze interaction with beats is done
+                this.el.emit("beat_hit", {hit: true, accurracy: Math.abs(this.deltaT - this.data.dur_ticks)}, true);
+                gazeActive = false;
+                this.el.components.material.color = "#00ff95";
+            }
+        })
     },
 
     tick: function () {
@@ -49,21 +61,15 @@ AFRAME.registerComponent('beat_anim', {
             }
         }
         else{
+            this.alpha -= this.alphaStep;
+            this.el.setAttribute("material", "opacity", this.alpha);
             //fading alpha, gaze active still during this till deletion
             if(this.deltaT == this.data.dur_ticks + this.data.grace_ticks_post){
-                //destroy this, done by sending an event to parent object that then removes this
-                console.log("should emit")
-                this.el.emit("remove_beat_object", {el: this.el}, true);
+                //destroy this, tell the beat spawner beat was missed
+                this.el.emit("beat_hit", {hit: false, accurracy: 0}, true);
+                this.el.parentNode.removeChild(this.el);
             }
         }
         this.deltaT++;
-        //get the vector between start pos and end pos
-
-        //var pos = this.curPos.lerp(this.endPos, 0.05);
-        //if object is on ring:
-        //create an event stating that a note has hit ring
-        //delete this object
-
-        //this.el.setAttribute("position", pos)
     }
 });

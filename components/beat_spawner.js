@@ -9,14 +9,14 @@ AFRAME.registerComponent('beat_spawner', {
     init: function () {
         this.createBeat(45);
         this.deltaT = 0;
-        this.el.addEventListener("remove_beat_object", function(event){
-            console.log("remove child ig");
-            console.log(event.detail.el);
+        this.el.addEventListener("beat_hit", function(event){
+            console.log("beat hit event");
+            console.log(event.detail);
         });
     },
 
     tick: function () {
-        //this.createBeat(0);
+        this.createBeat((this.deltaT*7)%360);
         this.deltaT++;
     },
 
@@ -33,6 +33,7 @@ AFRAME.registerComponent('beat_spawner', {
 
         entityEl.setAttribute("material",{
             color: "#86e0fe",
+            transparent: true,
         })
 
         entityEl.setAttribute("beat_anim",{
@@ -41,7 +42,7 @@ AFRAME.registerComponent('beat_spawner', {
             angle: angleIn,
             dur_ticks: this.data.dur_ticks,
             grace_ticks_pre: 5,
-            grace_ticks_post: 100,
+            grace_ticks_post: 50,
         })
     }
 
