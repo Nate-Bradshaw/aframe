@@ -11,6 +11,7 @@ aframe-watcher index.html
     <script src="script.js"></script>
     <script src="components\log.js"></script>
     <script src="components\beat_anim.js"></script>
+    <script src="components\beat_spawner.js"></script>
     <title>Vr project</title>
   </head>
   <body>
@@ -20,7 +21,8 @@ aframe-watcher index.html
       <a-entity class="lights" light="intensity: 1.884; castShadow: true" position="-0.5 1 1" data-aframe-default-light="" aframe-injected="" id="LightDirectional"></a-entity>
       <a-entity camera="active: true" position="0 1.6 0" wasd-controls="" look-controls="" id="MainCam"></a-entity>
       <a-entity geometry="primitive: ring; radiusInner: 1.12; segmentsPhi: 10; segmentsTheta: 64; thetaLength: 360" material="color: #ff9494" id="StaticRing" position="0 1.5 -2"></a-entity>
-    
-    <a-entity id="BeatCircle" beat_anim="ring: #StaticRing; start_depth: -50; angle: 45; dur_ticks: 20" geometry="primitive: circle; radius: 0.25" material="color: #86e0fe"></a-entity>    </a-scene>
+      <a-entity id="BeatSpawner" position="0 0 0" beat_spawner="dur_ticks: 50"></a-entity>
+
+    </a-scene>
   </body>
 </html>
