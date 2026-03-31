@@ -16,20 +16,27 @@ aframe-watcher index.html
   <body>
     <a-scene>
       <!-- Camera and cursor (gaze/click) -->
-      <a-entity id="cameraRig" position="0 0 0">
+      <a-camera>
         <a-entity
-          id="cam"
-          camera
-          position="0 1.6 0"
-          look-controls
-        >
-          <!-- Cursor configured to target only .clickable objects -->
-          <a-cursor
-            raycaster="objects: .clickable; showLine: true; far: 20"
-            fuse="false"
-          ></a-cursor>
+          id 
+          cursor="fuse: true; fuse-timeout = 1000"
+          raycaster="objects: .clickable"
+          position="0 0 -0.9"
+          
+          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;"
+          material="color: green; shader: flat"
+            
+          animation__fusing="property: geometry.thetaLength; from: 360; to: 0; dur: 1500; startEvents: fusing; easing: linear"
+          animation__reset="property: geometry.thetaLength; to: 360; dur: 50; startEvents: mouseleave">
+
+          <!-- Outer ring -->
+          <a-entity
+            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+            material="color: white; shader: flat">
+          </a-entity>
+
         </a-entity>
-      </a-entity>
+      </a-camera>
 
       <!-- Ground + light so you can see -->
       <a-plane position="0 0 -4" rotation="-90 0 0" width="20" height="20" color="#DDD"></a-plane>
@@ -54,6 +61,10 @@ aframe-watcher index.html
         height="0.6"
         width="1.2"
         color="#3B82F6"
+
+        animation__mouseenter="property: material.color; to: #89B4F9; dur: 100; startEvents: mouseenter"
+        animation__mouseleave="property: material.color; to: #3B82F6; dur: 100; startEvents: mouseleave">
+    </a-box>
       ></a-box>
 
       <a-box
@@ -64,6 +75,7 @@ aframe-watcher index.html
         depth="0"
         color="#808080"
         visible="false"
+        
       ></a-box>
 
       <a-text 
@@ -83,7 +95,10 @@ aframe-watcher index.html
       position="1.27971 2.31821 -1.993" 
       class="clickable" 
       scale="3 3 1"
-      visible="false"></a-entity>
+      visible="false"
+      animation__mouseenter="property: material.color; to: #89B4F9; dur: 100; startEvents: mouseenter"
+      animation__mouseleave="property: material.color; to: #3B82F6; dur: 100; startEvents: mouseleave">
+      ></a-entity>
 
       <a-entity
       id="btn" 
@@ -91,7 +106,10 @@ aframe-watcher index.html
       geometry="box"
       material="color: #FF0000" 
       scale="0.1 0.6 1.2"
-      class="clickable"></a-entity>
+      class="clickable"
+      
+      animation__mouseenter="property: material.color; to: #89B4F9; dur: 100; startEvents: mouseenter"
+      animation__mouseleave="property: material.color; to: #3B82F6; dur: 100; startEvents: mouseleave">></a-entity>
 
       <a-text 
       id="statusText-2" 
