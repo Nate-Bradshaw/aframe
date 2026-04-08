@@ -15,13 +15,17 @@ aframe-watcher index.html
     <title>Vr project</title>
   </head>
   <body>
-    <a-scene log="foobar" light="defaultLightsEnabled: false" keyboard-shortcuts="" screenshot="" xr-mode-ui="" device-orientation-permission-ui="" id="Scene">
+    <a-scene light="defaultLightsEnabled: false" keyboard-shortcuts="" screenshot="" xr-mode-ui="" device-orientation-permission-ui="" id="Scene">
+      <a-assets>
+        <audio id="song" src="music\Lord of the Rangs.mp3" preload="auto"></audio>
+      </a-assets>
+
       <a-sky color="#ECECEC" material="color: #4d4d4d" id="sky"></a-sky>
       <a-entity class="lights" light="color: #BBB; type: ambient" data-aframe-default-light="" aframe-injected="" id="LightAmbient"></a-entity>
       <a-entity class="lights" light="intensity: 1.884; castShadow: true" position="-0.5 1 1" data-aframe-default-light="" aframe-injected="" id="LightDirectional"></a-entity>
       <a-entity camera="active: true" position="0 1.6 0" wasd-controls="" look-controls="" id="MainCam"></a-entity>
       <a-entity geometry="primitive: ring; radiusInner: 1.12; segmentsPhi: 10; segmentsTheta: 64; thetaLength: 360" material="color: #ff9494" id="StaticRing" position="0 1.5 -2"></a-entity>
-      <a-entity id="BeatSpawner" position="0 0 0" beat_spawner="dur_ticks: 50"></a-entity>
+      <a-entity id="BeatSpawner" position="0 0 0" beat_spawner="dur_ticks: 50" sound__song="positional: false; src: #song; autoplay: false"></a-entity>
 
     </a-scene>
   </body>
