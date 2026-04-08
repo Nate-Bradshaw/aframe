@@ -45,42 +45,16 @@ aframe-watcher index.html
       <a-plane position="0 0 -4" rotation="-90 0 0" width="20" height="20" color="#DDD"></a-plane>
       <a-light type="ambient" intensity="0.9"></a-light>
 
-      <!-- A label so you see output inside the scene -->
+      <!-- Labels -->
       <a-text
-        id="statusText"
+        id="playGameText"
         value="Play Game"
-        position="0 2.2 -3"
+        position="1.5 2.2 -3"
         align="center"
         width="6"
         color="#111"
       ></a-text>
-
-      <!-- The interactive box -->
-      <a-box
-        id="switch-button"
-        class="clickable"
-        position="0 1.5 -3"
-        depth="0"
-        height="0.6"
-        width="1.2"
-        color="#3B82F6"
-
-        animation__mouseenter="property: material.color; to: #89B4F9; dur: 100; startEvents: mouseenter"
-        animation__mouseleave="property: material.color; to: #3B82F6; dur: 100; startEvents: mouseleave">
-    </a-box>
-      ></a-box>
-
-      <a-box
-        id="example-menu"
-        position="0 1.5 -2"
-        height="2"
-        width="3"
-        depth="0"
-        color="#808080"
-        visible="false"
-        
-      ></a-box>
-
+      
       <a-text 
       id="menuText"
       value="Menu" 
@@ -91,38 +65,62 @@ aframe-watcher index.html
       visible="false"
       ></a-text>
 
+      <a-text 
+      id="statusText-2" 
+      value="How To Play" 
+      position="-1.5 2.2 -3" 
+      align="center" 
+      width="6" 
+      color="#111" 
+      value: How To Play;
+      ></a-text>
+
+      <!-- Buttons -->
+      <a-box
+        id="switch-button"
+        class="clickable"
+        position="1.5 1.5 -3"
+        depth="0"
+        height="0.6"
+        width="1.2"
+        color="#3B82F6"
+
+        animation__mouseenter="property: material.color; to: #89B4F9; dur: 100; startEvents: mouseenter"
+        animation__mouseleave="property: material.color; to: #3B82F6; dur: 100; startEvents: mouseleave">
+      </a-box>
       <a-entity 
       id="exit-button"
       material="color:#FFC0CB" 
       geometry="depth: 0; height: 0.1; width: 0.1"
       position="1.27971 2.31821 -1.993" 
-      class="clickable" 
+      class="not-clickable" 
       scale="3 3 1"
       visible="false"
       animation__mouseenter="property: material.color; to: #89B4F9; dur: 100; startEvents: mouseenter"
-      animation__mouseleave="property: material.color; to: #3B82F6; dur: 100; startEvents: mouseleave">
+      animation__mouseleave="property: material.color; to: #FFC0CB; dur: 100; startEvents: mouseleave">
       ></a-entity>
 
       <a-entity
-      id="btn" 
-      position="-1.5 1.5 -1.5" 
+      id="instruction-btn" 
+      position="-1.5 1.5 -3" 
       geometry="box"
       material="color: #FF0000" 
-      scale="0.1 0.6 1.2"
+      scale="1 0.6 0.1"
       class="clickable"
       
       animation__mouseenter="property: material.color; to: #89B4F9; dur: 100; startEvents: mouseenter"
-      animation__mouseleave="property: material.color; to: #3B82F6; dur: 100; startEvents: mouseleave">></a-entity>
+      animation__mouseleave="property: material.color; to: #FF0000; dur: 100; startEvents: mouseleave">></a-entity>
+      ></a-box>
 
-      <a-text 
-      id="statusText-2" 
-      value="How To Play" 
-      position="-1.5 2.2 -1.45105" 
-      align="center" 
-      width="6" 
-      color="#111" 
-      value: Play Game - Test;
-      rotation="0 90 0"></a-text>
+      <a-box
+        id="example-menu"
+        position="0 1.5 -2"
+        height="2"
+        width="3"
+        depth="0"
+        color="#808080"
+        visible="false"  
+      ></a-box>
     </a-scene>
 
   </body>

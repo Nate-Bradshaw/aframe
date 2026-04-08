@@ -1,25 +1,27 @@
 window.addEventListener("load", () => {
   // Loading each UI element using its ID
-  const btn = document.querySelector("#btn")
+  const instuctionbtn = document.querySelector("#instruction-btn")
   const switchBtn = document.querySelector("#switch-button")
   const exampleMenu = document.querySelector("#example-menu")
   const exitBtn = document.querySelector("#exit-button")
   const menuTxt = document.querySelector("#menuText")
 
   // Start Button action
-  btn.addEventListener("click", () => {
+  instuctionbtn.addEventListener("click", () => {
+    toggle_clickable(switchBtn, false);
+    toggle_clickable(instuctionbtn, false);
+    toggle_clickable(exitBtn, true);
     exampleMenu.setAttribute("visible", "true");
-    exitBtn.setAttribute("visible", "true");
     menuTxt.setAttribute("visible", "true");
-    switchBtn.setAttribute("visible", "false");
   });
 
   // Exit Button action
   exitBtn.addEventListener("click", () => {
     exampleMenu.setAttribute("visible", "false");
-    exitBtn.setAttribute("visible", "false");
     menuTxt.setAttribute("visible", "false");
-    switchBtn.setAttribute("visible", "true");
+    toggle_clickable(exitBtn, false);
+    toggle_clickable(switchBtn, true);
+    toggle_clickable(instuctionbtn, true);
   });
 
   // Switches to the game
@@ -27,3 +29,13 @@ window.addEventListener("load", () => {
     window.location.href = "index.html";
   });
 });
+
+function toggle_clickable(btn, state) {
+  if (state) {
+    btn.setAttribute("visible", "true");
+    btn.setAttribute("class", "clickable");
+  } else {
+    btn.setAttribute("visible", "false");
+    btn.setAttribute("class", "not-clickable");
+  }
+}
