@@ -7,8 +7,25 @@ AFRAME.registerComponent('beat_spawner', {
     },
 
     init: function () {
-        this.createBeat(45);
+        this.beatSchedule= [];
+        this.nextBeatIndex = 0;
+        this.startTime = null;
+        this.isPlaying = false
+        //this.createBeat(45);
         this.deltaT = 0;
+        this.bpm=104;
+        this.ballspeed=300;
+
+        this.el.sceneEl.addEventListener('load-beat-schedule', (event) => {
+            this.beatSchedule = event.detail.beats;
+            this.bpm = event.detail.bpm;
+            this.ballSpeed = event.detail.ballSpeed;
+            this.nextBeatIndex = 0;
+            this.startTime = performance.now() + 100; // 100ms delay
+            this.isPlaying = true;
+            
+        });
+
         this.el.addEventListener("beat_hit", function(event){
             console.log("beat hit event");
             console.log(event.detail);
@@ -16,7 +33,23 @@ AFRAME.registerComponent('beat_spawner', {
     },
 
     tick: function () {
-        this.createBeat((this.deltaT*7)%360);
+        if (!this.isPlaying) return;
+
+        const currentTime= performance.now() - this.startTime;
+
+       while (this.nextBeatIndex < this.beatSchedule.length) {
+            const nextBeat = this.beatSchedule[this.nextBeatIndex];
+            
+            if (currentTime >= nextBeat.timeMs) {
+                // Time to spawn this beat
+                this.createBeat(nextBeat.angle);
+                this.nextBeatIndex++;
+            }
+            else {
+                break;
+            }
+        }
+        
         this.deltaT++;
     },
 
