@@ -13,7 +13,7 @@ const songObj = {
                 Kevin MacLeod (incompetech.com)
                 Licensed under Creative Commons: By Attribution 4.0
                 http://creativecommons.org/licenses/by/4.0/` ,      //need to put this somewhere for legal reasons
-    beatMapArr: [[1,90],[3,180],[1,90],[3,0],[1,90],[3,180],[1,90],[3,270],   //4 bars
+    beatMapArr: [[1,90],[3,45],[1,90],[3,0],[1,90],[3,180],[1,90],[3,270],   //4 bars
                  [1,270],[2,225],[1,225],[1,180],[2,135],[1,135],[1,90],[2,45],[1,45],[1,0],[2,315],[1,315],   //4 bars
                  [1,68],[1,45],[2,22],[1,248],[1,225],[2,202],[1,112],[1,135],[2,157],[1,292],[1,315],[2,338],  //4 bars
                  [1,158],[1,112],[2,135],[1,22],[1,68],[2,45],[1,135],[1,45],[2,90],[1,225],[1,315],[3,270],   //4 and a quarter
