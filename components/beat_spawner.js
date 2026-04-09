@@ -19,6 +19,7 @@ AFRAME.registerComponent('beat_spawner', {
                         http://creativecommons.org/licenses/by/4.0/` ,      //need to put this somewhere for legal reasons
 
             //each array will have the delay AFTER the beat in number of quarter notes (first), and where in the circle it will come from (not there yet)
+            // [beats since last note, angle]
             beatMapArr: [[1,90],[3,180],[1,90],[3,0],[1,90],[3,180],[1,90],[3,270],   //4 bars
                         [1,270],[2,225],[1,225],[1,180],[2,135],[1,135],[1,90],[2,45],[1,45],[1,0],[2,315],[1,315],   //4 bars
                         [1,68],[1,45],[2,22],[1,248],[1,225],[2,202],[1,112],[1,135],[2,157],[1,292],[1,315],[2,338],  //4 bars
@@ -28,10 +29,10 @@ AFRAME.registerComponent('beat_spawner', {
                         ]
         }
 
-        this.beatIndex = 0;
+        this.beatIndex = parseInt(0);
         this.startTime = null;
         this.isPlaying = false;
-        this.deltaT = 0; //delta ticks
+        this.elapsed = 0; //time elapsed in ms
 
         this.el.addEventListener("beat_hit", function(event){
             console.log("beat hit event");
@@ -43,25 +44,34 @@ AFRAME.registerComponent('beat_spawner', {
             console.log("sound playing")
             event.srcElement.components.sound__song.playSound(); //note: sound will not play if there was no user interaction, start on the /menu page
             //this.el.components.sound__song.playSound();
-            event.srcElement.components.beat_spawner.createBeat(0);
+            //event.srcElement.components.beat_spawner.createBeat(0);
+            event.srcElement.components.beat_spawner.beats = event.srcElement.components.beat_spawner.calculateBeatTimings();
+            //console.log(this.beats);
+            console.log(this.beats[0]);
+            //console.log(this.beats[1]);
+            isPlaying = true;
         });
 
     },
 
     tick: function (time, timeDelta) {
-        //this.getCurrentTime();
         if (!this.isPlaying) return;
-
-        //const currentTime = performance.now() - this.startTime; //performance.now() returns a timestamp 
-
-        //! remove this while
         
-        //if (currentTime >= nextBeat.timeMs) {
-        //    // Time to spawn this beat
-        //    this.createBeat(nextBeat.angle);
-        //    this.nextBeatIndex++;
-        //}
-        
+        this.elapsed += timeDelta;
+
+        //console.log(this.elapsed);
+        //console.log(this.beatIndex);
+        //console.log(this.beats);
+        //console.log(this.beats[this.beatIndex].timeMs);
+        //console.log(this.data.dur);
+        //console.log(this.beats[this.beatIndex].timeMs + this.data.dur);
+
+        if(this.elapsed >= this.beats[this.beatIndex].timeMs + this.data.dur){
+            this.createBeat(this.beats[this.beatIndex].angle)
+            this.beatIndex++;
+        }
+
+
         
         this.deltaT++;
     },
@@ -114,8 +124,9 @@ AFRAME.registerComponent('beat_spawner', {
             beatSchedule.push({
                 timeMs: accumulatedTime,
                 angle: angle,
-                beatIndex: index,
-                delayNotes: delayNotes
+                //beatIndex: index,
+                //delayNotes: delayNotes
+                //dont need above, the index is the beatindex and delay notes isnt needed with the ms
             });
             
         });
