@@ -3,7 +3,7 @@ AFRAME.registerComponent('beat_spawner', {
     //https://aframe.io/docs/1.7.0/core/component.html
 
     schema: {
-        dur_ticks: {type: 'int', default: 10},
+        dur: {type: 'int', default: 1000}, //miliseconds
     },
 
     init: function () {
@@ -43,11 +43,13 @@ AFRAME.registerComponent('beat_spawner', {
             console.log("sound playing")
             event.srcElement.components.sound__song.playSound(); //note: sound will not play if there was no user interaction, start on the /menu page
             //this.el.components.sound__song.playSound();
+            event.srcElement.components.beat_spawner.createBeat(0);
         });
+
     },
 
-    tick: function () {
-        this.getCurrentTime();
+    tick: function (time, timeDelta) {
+        //this.getCurrentTime();
         if (!this.isPlaying) return;
 
         //const currentTime = performance.now() - this.startTime; //performance.now() returns a timestamp 
@@ -92,7 +94,7 @@ AFRAME.registerComponent('beat_spawner', {
             ring: "#StaticRing",
             start_depth: -50,
             angle: angleIn,
-            dur_ticks: this.data.dur_ticks,
+            dur: this.data.dur,
             grace_ticks_pre: 5,
             grace_ticks_post: 50,
         })

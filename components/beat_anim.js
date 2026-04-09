@@ -11,7 +11,7 @@ AFRAME.registerComponent('beat_anim', {
         ring: {type: 'selector'}, //this should be the ring where the notes need to go
         start_depth: {type: 'number'},
         angle: {type: 'number'}, //float
-        dur_ticks: {type: 'int', default: 10}, //int, docs say the ticks are at either 60 or 120 per second
+        dur: {type: 'int', default: 10}, //int, duration in miliseconds (changed to sec from tick to be fps independant)
         grace_ticks_pre: {type: 'int', default: 2}, //this is the grace before the beat hits the ring
         grace_ticks_post: {type: 'int', default: 5}, //this is the grace after the beat hits the ring
         //TODO: figure out what tps we are running
@@ -19,22 +19,26 @@ AFRAME.registerComponent('beat_anim', {
     },
 
     init: function () {
+        this.ready = false;
+    },
+
+    lateInit: function () {
         //vectors are threejs
-        var pos = new THREE.Vector3(0, 0, this.data.start_depth);
-        pos.add(this.data.ring.object3D.position);
-        this.el.setAttribute("position", pos);
+        this.startPos = new THREE.Vector3(0, 0, this.data.start_depth);
+        this.startPos.add(this.data.ring.object3D.position);
+        this.el.setAttribute("position", this.startPos);
+
         this.radius = this.data.ring.components.geometry.data.radiusInner;
-        this.deltaT = 0; //delta ticks, not time, ticks because thats what t means, ticks. not time.
+        this.elapsed = 0; //time, in miliseconds, that has elapsed
 
-        var x = pos.x + (this.radius * Math.cos(THREE.MathUtils.degToRad(this.data.angle)));
-        var y = pos.y + (this.radius * Math.sin(THREE.MathUtils.degToRad(this.data.angle)));
-        var endPos = new THREE.Vector3(x, y, this.data.ring.object3D.position.z);
+        var x = this.startPos.x + (this.radius * Math.cos(THREE.MathUtils.degToRad(this.data.angle)));
+        var y = this.startPos.y + (this.radius * Math.sin(THREE.MathUtils.degToRad(this.data.angle)));
+        this.endPos = new THREE.Vector3(x, y, this.data.ring.object3D.position.z);
 
-        this.step = (endPos.sub(pos)).divideScalar(this.data.dur_ticks);
+        console.log(this.endPos);
+
         this.alphaStep = 1 / this.data.grace_ticks_post;
         this.alpha = 1;
-
-        //console.log(this.data.ring.components.geometry.data);
 
         this.gazeActive = false;
 
@@ -43,17 +47,40 @@ AFRAME.registerComponent('beat_anim', {
                 //idea here is: if looked at in the gaze window, the beat_spawner gets notified for score ect
                 //colour change for feedback
                 //! untested until gaze interaction with beats is done
-                this.el.emit("beat_hit", {hit: true, accurracy: Math.abs(this.deltaT - this.data.dur_ticks)}, true);
+                this.el.emit("beat_hit", {hit: true, accurracy: Math.abs(this.accumulatedT - this.data.dur)}, true);
                 gazeActive = false;
                 this.el.components.material.color = "#00ff95";
             }
         })
     },
 
-    tick: function () {
-        var pos = this.el.object3D.position;
+    tick: function (time, timeDelta) {
+        if(!this.ready){
+            this.lateInit();
+            this.ready = true;
+        }
 
-        if(this.deltaT < this.data.dur_ticks){
+        //var pos = this.el.object3D.position;
+
+        this.elapsed += timeDelta;
+
+        const t = Math.min(this.elapsed / this.data.dur, 1);
+        //console.log(this.el.object3D.position)
+        //console.log(this.startPos)
+        //console.log(this.endPos)
+        //console.log(t)
+
+        this.el.object3D.position.lerpVectors(this.startPos, this.endPos, t);
+        //console.log(this.el.object3D.position)
+        
+
+        if (t >= 1) {
+            this.running = false;
+            this.el.emit('move-complete');
+        }
+
+        /*
+        if(this.accumulatedT < this.data.dur){
             pos.add(this.step);
             this.el.setAttribute("position", pos)
             if(this.deltaT == this.data.dur_ticks - this.data.grace_ticks_pre){
@@ -71,5 +98,6 @@ AFRAME.registerComponent('beat_anim', {
             }
         }
         this.deltaT++;
+        */
     }
 });
