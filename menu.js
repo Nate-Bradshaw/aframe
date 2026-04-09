@@ -6,6 +6,7 @@ window.addEventListener("load", () => {
   const exitBtn = document.querySelector("#exit-button")
   const menuTxt = document.querySelector("#menuText")
   const instructionTxt = document.querySelector("#gameInstructions")
+  const resetBtn = document.querySelector("#reset-btn")
 
   console.log(instructionTxt)
 
@@ -27,6 +28,18 @@ window.addEventListener("load", () => {
     toggle_clickable(exitBtn, false);
     toggle_clickable(switchBtn, true);
     toggle_clickable(instructionbtn, true);
+  });
+
+  // Reset Button action
+   resetBtn.addEventListener("click", () => {
+      //Get camera and access its look-controls
+      const mainCam = document.querySelector('#MainCam');
+      const lookControls = mainCam.components['look-controls'];
+
+      if (lookControls) {
+        // Reset horizontal rotation (left/right)
+        lookControls.yawObject.rotation.y = 0;
+      }
   });
 
   // Switches to the game

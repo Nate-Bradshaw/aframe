@@ -131,6 +131,18 @@ aframe-watcher index.html
       scale="0.4 0.5 1"
       visible="false">
       </a-text>
+      
+      <!-- Button to reset roration to forward facing -->
+      <a-sphere 
+      id = "reset-btn"
+      position="0 -0.75 0" 
+        radius="1" 
+        color="#EF2D5E"
+        class="clickable"
+
+        animation__mouseenter="property: material.color; to: #F5819E; dur: 100; startEvents: mouseenter"
+        animation__mouseleave="property: material.color; to: #EF2D5E; dur: 100; startEvents: mouseleave">
+    </a-sphere>
     </a-scene>
   </body>
 </html>
