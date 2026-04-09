@@ -12,8 +12,8 @@ AFRAME.registerComponent('beat_anim', {
         start_depth: {type: 'number'},
         angle: {type: 'number'}, //float
         dur: {type: 'int', default: 10}, //int, duration in miliseconds (changed to sec from tick to be fps independant)
-        grace_ticks_pre: {type: 'int', default: 2}, //this is the grace before the beat hits the ring
-        grace_ticks_post: {type: 'int', default: 5}, //this is the grace after the beat hits the ring
+        grace_time_pre: {type: 'int', default: 200}, //this is the grace before the beat hits the ring in ms
+        grace_time_post: {type: 'int', default: 500}, //this is the grace after the beat hits the ring in ms
         //TODO: figure out what tps we are running
         //feels like its at 60 per second
     },
@@ -35,12 +35,11 @@ AFRAME.registerComponent('beat_anim', {
         var y = this.startPos.y + (this.radius * Math.sin(THREE.MathUtils.degToRad(this.data.angle)));
         this.endPos = new THREE.Vector3(x, y, this.data.ring.object3D.position.z);
 
-        console.log(this.endPos);
-
-        this.alphaStep = 1 / this.data.grace_ticks_post;
-        this.alpha = 1;
+        this.alphaElapsed = 0;
 
         this.gazeActive = false;
+
+        this.running = true;
 
         this.el.addEventListener("looked_at", function(event){
             if(gazeActive){
@@ -60,44 +59,30 @@ AFRAME.registerComponent('beat_anim', {
             this.ready = true;
         }
 
-        //var pos = this.el.object3D.position;
-
         this.elapsed += timeDelta;
 
         const t = Math.min(this.elapsed / this.data.dur, 1);
-        //console.log(this.el.object3D.position)
-        //console.log(this.startPos)
-        //console.log(this.endPos)
-        //console.log(t)
-
-        this.el.object3D.position.lerpVectors(this.startPos, this.endPos, t);
-        //console.log(this.el.object3D.position)
         
 
-        if (t >= 1) {
-            this.running = false;
-            this.el.emit('move-complete');
-        }
-
-        /*
-        if(this.accumulatedT < this.data.dur){
-            pos.add(this.step);
-            this.el.setAttribute("position", pos)
-            if(this.deltaT == this.data.dur_ticks - this.data.grace_ticks_pre){
-                this.gazeActive = true;
-            }
+        if (this.running) {
+            //still running
+            this.el.object3D.position.lerpVectors(this.startPos, this.endPos, t);
+            
+            if(this.elapsed >= this.data.dur - this.data.grace_time_pre) {this.gazeActive = true;}
+            if(t==1) {this.running = false;}
         }
         else{
-            this.alpha -= this.alphaStep;
-            this.el.setAttribute("material", "opacity", this.alpha);
+            //fade the object out
+            this.alphaElapsed += timeDelta;
+            const alphaT = Math.min(this.alphaElapsed / this.data.grace_time_post, 1);
+
+            this.el.setAttribute("material", "opacity", THREE.MathUtils.lerp(1, 0, alphaT));
             //fading alpha, gaze active still during this till deletion
-            if(this.deltaT == this.data.dur_ticks + this.data.grace_ticks_post){
+            if(this.elapsed >= this.data.dur + this.data.grace_time_post){
                 //destroy this, tell the beat spawner beat was missed
                 this.el.emit("beat_hit", {hit: false, accurracy: 0}, true);
                 this.el.parentNode.removeChild(this.el);
             }
         }
-        this.deltaT++;
-        */
     }
 });
