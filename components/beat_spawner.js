@@ -20,13 +20,17 @@ AFRAME.registerComponent('beat_spawner', {
 
             //each array will have the delay AFTER the beat in number of quarter notes (first), and where in the circle it will come from (not there yet)
             // [beats since last note, angle]
+            /*
             beatMapArr: [[1,90],[3,180],[1,90],[3,0],[1,90],[3,180],[1,90],[3,270],   //4 bars
-                        [1,270],[2,225],[1,225],[1,180],[2,135],[1,135],[1,90],[2,45],[1,45],[1,0],[2,315],[1,315],   //4 bars
+                        [1,270],[2,225],[1,225],[1,180],[2,135],[1,135],[1,90],[2,45],[1,45],[0.5,0],[2,315],[1,315],   //4 bars
                         [1,68],[1,45],[2,22],[1,248],[1,225],[2,202],[1,112],[1,135],[2,157],[1,292],[1,315],[2,338],  //4 bars
                         [1,158],[1,112],[2,135],[1,22],[1,68],[2,45],[1,135],[1,45],[2,90],[1,225],[1,315],[3,270],   //4 and a quarter
                         [2,135],[2,315],[2,225],[2,45],[1,112],[1,112],[2,292],[2,247],[1,68],   //3 and 3 quarters
                         [4,90],[4,180],[4,270],[4,0]   //4 bars
                         ]
+            */
+
+            beatMapArr: [[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],]
         }
 
         this.beatIndex = parseInt(0);
@@ -46,9 +50,6 @@ AFRAME.registerComponent('beat_spawner', {
             //this.el.components.sound__song.playSound();
             //event.srcElement.components.beat_spawner.createBeat(0);
             event.srcElement.components.beat_spawner.beats = event.srcElement.components.beat_spawner.calculateBeatTimings();
-            //console.log(this.beats);
-            console.log(this.beats[0]);
-            //console.log(this.beats[1]);
             isPlaying = true;
         });
 
@@ -65,6 +66,11 @@ AFRAME.registerComponent('beat_spawner', {
         //console.log(this.beats[this.beatIndex].timeMs);
         //console.log(this.data.dur);
         //console.log(this.beats[this.beatIndex].timeMs + this.data.dur);
+
+        if(this.beatIndex == this.beats.length){
+            this.isPlaying = false;
+            return;
+        }
 
         if(this.elapsed >= this.beats[this.beatIndex].timeMs + this.data.dur){
             this.createBeat(this.beats[this.beatIndex].angle)
