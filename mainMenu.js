@@ -7,6 +7,7 @@ window.addEventListener("load", () => {
   const menuTxt = document.querySelector("#menuText")
   const instructionTxt = document.querySelector("#gameInstructions")
   const resetBtn = document.querySelector("#reset-btn")
+  const menuImage = document.querySelector("#menuImage")
 
   console.log(instructionTxt)
 
@@ -15,6 +16,7 @@ window.addEventListener("load", () => {
     exampleMenu.setAttribute("visible", true);
     menuTxt.setAttribute("visible", true);
     instructionTxt.setAttribute("visible", true);
+    menuImage.setAttribute("visible", true);
     toggle_clickable(switchBtn, false);
     toggle_clickable(instructionbtn, false);
     toggle_clickable(exitBtn, true);
@@ -25,6 +27,7 @@ window.addEventListener("load", () => {
     exampleMenu.setAttribute("visible", false);
     menuTxt.setAttribute("visible", false);
     instructionTxt.setAttribute("visible", false);
+    menuImage.setAttribute("visible", false);
     toggle_clickable(exitBtn, false);
     toggle_clickable(switchBtn, true);
     toggle_clickable(instructionbtn, true);
@@ -56,4 +59,4 @@ function toggle_clickable(btn, state) {
     btn.setAttribute("visible", false);
     btn.setAttribute("class", "not-clickable");
   }
-}
+};

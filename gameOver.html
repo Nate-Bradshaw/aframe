@@ -8,7 +8,7 @@ aframe-watcher index.html
     <!-- <link rel="stylesheet" href="./style.css">  -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
-    <script src="mainMenu.js"></script>
+    <script src="gameOverMenu.js"></script>
     <title>Vr project</title>
   </head>
   <body>
@@ -43,72 +43,25 @@ aframe-watcher index.html
       <a-plane position="0 0 -4" rotation="-90 0 0" width="20" height="20" color="#DDD"></a-plane>
       <a-light type="ambient" intensity="0.9"></a-light>
 
-      <!-- Labels -->
-      <a-text
-      id="playGameText"
-      value="Play Game"
-      position="1.5 2.2 -3"
-      align="center"
-      width="6"
-      color="#111"
-      ></a-text>
-      
-      <a-text 
-      id="menuText"
-      value="Menu" 
-      position="0.00369 2.699 -1.95343" 
-      align="center" 
-      width="6" 
-      color="#111"
-      visible="false"
-      ></a-text>
-
-      <a-text 
-      id="statusText-2" 
-      value="How To Play" 
-      position="-1.5 2.2 -3" 
-      align="center" 
-      width="6" 
-      color="#111" 
-      value: How To Play;
-      ></a-text>
-
       <!-- Buttons -->
-      <a-box
-      id="switch-button"
-      class="clickable"
-      position="1.5 1.5 -3"
-      depth="0"
-      height="0.6"
-      width="1.2"
-      color="#3B82F6"
-
-      animation__mouseenter="property: material.color; to: #89B4F9; dur: 100; startEvents: mouseenter"
-      animation__mouseleave="property: material.color; to: #3B82F6; dur: 100; startEvents: mouseleave">
-      </a-box>
-
       <a-entity 
       id="exit-button"
       material="color:#FFC0CB" 
       geometry="depth: 0; height: 0.350; width: 1"
-      position="-0.024 0.802 -1.993" 
-      class="not-clickable" 
-      visible="false"
+      position="0.8806 0.802 -1.993" 
+      class="clickable" 
       animation__mouseenter="property: material.color; to: #89B4F9; dur: 100; startEvents: mouseenter"
       animation__mouseleave="property: material.color; to: #FFC0CB; dur: 100; startEvents: mouseleave">
       ></a-entity>
 
-      <a-entity
-      id="instruction-btn" 
-      position="-1.5 1.5 -3" 
-      geometry="box"
-      material="color: #FF0000" 
-      scale="1 0.6 0.1"
-      class="clickable"
-      
-      animation__mouseenter="property: material.color; to: #89B4F9; dur: 100; startEvents: mouseenter"
-      animation__mouseleave="property: material.color; to: #FF0000; dur: 100; startEvents: mouseleave">></a-entity>
-      ></a-box>
+      <a-entity id="restart-button"
+      material="color: #32a852" 
+      geometry="depth: 0; height: 0.35" 
+      position="-0.83633 0.802 -1.993" 
+      class="clickable" 
+      animation__mouseenter="dur: 100; property: material.color; startEvents: mouseenter; to: #89B4F9" 
+      animation__mouseleave="dur: 100; property: material.color; startEvents: mouseleave; to: #32a852">
+      &gt;</a-entity>
 
       <!-- Menu Contents -->
       <a-box
@@ -118,24 +71,15 @@ aframe-watcher index.html
       width="3"
       depth="0"
       color="#808080"
-      visible="false"  
       ></a-box>
       <a-text id="gameInstructions"
-      value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-      position="-1.44642 1.91139 -1.99643"
-      align="center" 
+      value="Game Over"
+      position="-0.003 1.717 -1.996"
       color="#111" 
       scale="0.4 0.5 1" 
-      text="align: left; 
-      width: 4.8"
-      visible="false">
+      text="align: center; 
+      width: 17.870">
       </a-text>
-      <a-image 
-      id="menuImage"
-      src="images/Kevin_Macleod.jpg"
-      position="0.979 1.979 -1.989"
-      visible="false"
-      ></a-image>
 
       <!-- Button to reset roration to forward facing -->
       <a-sphere 
