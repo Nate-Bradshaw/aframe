@@ -56,10 +56,13 @@ AFRAME.registerComponent('beat_anim', {
 
         this.el.addEventListener("mouseenter", function(event){
             event.srcElement.components.beat_anim.lookedAt = true;
+            console.log("ms enter")
         })
 
         this.el.addEventListener("mouseleave", function(event){
             event.srcElement.components.beat_anim.lookedAt = false;
+            console.log("ms exit")
+
             //this.lookedAt = false;
         })
     },
@@ -79,6 +82,7 @@ AFRAME.registerComponent('beat_anim', {
             console.log("fooof")
             this.el.emit("beat_hit", {hit: true, accurracy: 1}, true);
             this.el.parentNode.removeChild(this.el); //!TEMP, MAKE BETTER FEEDBACK
+            return;
         }
         
 
@@ -98,8 +102,13 @@ AFRAME.registerComponent('beat_anim', {
             //fading alpha, gaze active still during this till deletion
             if(this.elapsed >= this.data.dur + this.data.grace_time_post){
                 //destroy this, tell the beat spawner beat was missed
-                this.el.emit("beat_hit", {hit: false, accurracy: 0}, true);
-                this.el.parentNode.removeChild(this.el);
+                try{
+                    this.el.emit("beat_hit", {hit: false, accurracy: 0}, true);
+                    this.el.parentNode.removeChild(this.el);
+                } catch(error){
+                    console.log(error)
+                }
+
             }
         }
     }

@@ -26,7 +26,7 @@ aframe-watcher index.html
         <a-entity id="cursor" raycaster="" cursor__m="" position="0 0 -0.1" geometry="primitive: circle; radius: 0.001" scale="0.5 0.5 0.5"></a-entity>
       </a-entity>
       <a-entity geometry="primitive: ring; radiusInner: 1.12; segmentsPhi: 10; segmentsTheta: 64; thetaLength: 360" material="color: #ff9494" id="StaticRing" position="0 1.5 -2"></a-entity>
-      <a-entity id="BeatSpawner" position="0 0 0" beat_spawner="dur_ticks: 50" sound__song="positional: false; src: #song; autoplay: false"></a-entity>
+      <a-entity id="BeatSpawner" position="0 0 0" beat_spawner="dur_ticks: 50; counter: #counter" sound__song="positional: false; src: #song; autoplay: false"></a-entity>
 
       <a-entity id="Floor" position="0 0 0" geometry="primitive: circle; radius: 2.5"  rotation="-90 0 0" material="color: #b6a3cd; flatShading: false; roughness: 0.5"></a-entity> geometry="primitive: circle; radius: 2.5"></a-entity>
       <a-entity id="Floor-2" geometry="primitive: circle; radius: 3" rotation="-90 0 0" material="color: #74549a" position="0 -0.12743 0"></a-entity>
@@ -61,6 +61,10 @@ aframe-watcher index.html
           <a-entity id="speakerCircle-2" geometry="primitive: circle; radius: 0.31" position="0 0 0.02724" rotation="0 0 0" scale="1 1 1" material="color: #f2e377"></a-entity>
           <a-entity id="speakerCircle-3" geometry="primitive: circle; radius: 0.075" position="0 0 0.0531" rotation="0 0 0" scale="1 1 1" material="color: #c66217"></a-entity>
         </a-entity>
+      </a-entity>
+
+      <a-entity id="tv" position="0.40721 1.41598 -1.52407">
+        <a-entity id="counter" text__counter="align: center; value: 0" scale="10 10 10"></a-entity>
       </a-entity>
 
 

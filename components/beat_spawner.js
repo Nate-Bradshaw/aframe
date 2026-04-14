@@ -4,6 +4,7 @@ AFRAME.registerComponent('beat_spawner', {
 
     schema: {
         dur: {type: 'int', default: 1000}, //miliseconds
+        counter: {type: 'selector'}
     },
 
     init: function () {
@@ -38,9 +39,12 @@ AFRAME.registerComponent('beat_spawner', {
         this.isPlaying = false;
         this.elapsed = 0; //time elapsed in ms
 
-        this.el.addEventListener("beat_hit", function(event){
-            console.log("beat hit event");
-            console.log(event.detail);
+        this.el.addEventListener("beat_hit", (event) => {
+            //console.log("beat hit event");
+            //console.log(event.detail);
+            if(event.detail.hit){
+                this.data.counter.setAttribute('text__counter', 'value', parseInt(this.data.counter.components.text__counter.data.value) + 1);
+            }
         });
 
 
