@@ -22,7 +22,9 @@ aframe-watcher index.html
       <a-sky color="#ECECEC" material="color: #17132f" id="sky"></a-sky>
       <a-entity class="lights" light="color: #BBB; type: ambient" data-aframe-default-light="" aframe-injected="" id="LightAmbient"></a-entity>
       <a-entity class="lights" light="intensity: 1.884; castShadow: true" position="-0.5 1 1" data-aframe-default-light="" aframe-injected="" id="LightDirectional"></a-entity>
-      <a-entity camera="active: true" position="0 1.6 0" wasd-controls="" look-controls="" id="MainCam"></a-entity>
+      <a-entity camera="active: true" position="0 1.6 0" wasd-controls="" look-controls="" id="MainCam">
+        <a-entity id="cursor" raycaster="" cursor__m="" position="0 0 -0.1" geometry="primitive: circle; radius: 0.001" scale="0.5 0.5 0.5"></a-entity>
+      </a-entity>
       <a-entity geometry="primitive: ring; radiusInner: 1.12; segmentsPhi: 10; segmentsTheta: 64; thetaLength: 360" material="color: #ff9494" id="StaticRing" position="0 1.5 -2"></a-entity>
       <a-entity id="BeatSpawner" position="0 0 0" beat_spawner="dur_ticks: 50" sound__song="positional: false; src: #song; autoplay: false"></a-entity>
 

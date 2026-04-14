@@ -73,7 +73,7 @@ AFRAME.registerComponent('beat_spawner', {
         }
 
         if(this.elapsed >= this.beats[this.beatIndex].timeMs + this.data.dur){
-            this.createBeat(this.beats[this.beatIndex].angle)
+            this.createBeat(this.beats[this.beatIndex].angle, this.elapsed)
             this.beatIndex++;
         }
 
@@ -90,7 +90,7 @@ AFRAME.registerComponent('beat_spawner', {
         return audioEl.context.currentTime - audioEl._startedAt; //returns the time in the audio
     },
 
-    createBeat: function(angleIn){
+    createBeat: function(angleIn, i){
         //var sceneEl = document.querySelector('a-scene');
         var entityEl = document.createElement("a-entity");
 
@@ -111,9 +111,11 @@ AFRAME.registerComponent('beat_spawner', {
             start_depth: -50,
             angle: angleIn,
             dur: this.data.dur,
-            grace_ticks_pre: 5,
-            grace_ticks_post: 50,
+            grace_time_pre: 50,
+            grace_time_post: 500,
         })
+
+        entityEl.setAttribute('id', i.toString());
     },
 
     calculateBeatTimings: function(){

@@ -23,6 +23,7 @@ AFRAME.registerComponent('beat_anim', {
     },
 
     lateInit: function () {
+        this.ready = true;
         //vectors are threejs
         this.startPos = new THREE.Vector3(0, 0, this.data.start_depth);
         this.startPos.add(this.data.ring.object3D.position);
@@ -38,6 +39,7 @@ AFRAME.registerComponent('beat_anim', {
         this.alphaElapsed = 0;
 
         this.gazeActive = false;
+        this.lookedAt = false; //current state of being looked at
 
         this.running = true;
 
@@ -51,17 +53,33 @@ AFRAME.registerComponent('beat_anim', {
                 this.el.components.material.color = "#00ff95";
             }
         })
+
+        this.el.addEventListener("mouseenter", function(event){
+            event.srcElement.components.beat_anim.lookedAt = true;
+        })
+
+        this.el.addEventListener("mouseleave", function(event){
+            event.srcElement.components.beat_anim.lookedAt = false;
+            //this.lookedAt = false;
+        })
     },
 
     tick: function (time, timeDelta) {
         if(!this.ready){
             this.lateInit();
-            this.ready = true;
         }
 
         this.elapsed += timeDelta;
 
         const t = Math.min(this.elapsed / this.data.dur, 1);
+
+        //console.log(this.lookedAt)
+
+        if(this.lookedAt && this.gazeActive){
+            console.log("fooof")
+            this.el.emit("beat_hit", {hit: true, accurracy: 1}, true);
+            this.el.parentNode.removeChild(this.el); //!TEMP, MAKE BETTER FEEDBACK
+        }
         
 
         if (this.running) {
