@@ -19,12 +19,31 @@ aframe-watcher index.html
         <audio id="song" src="music\Lord of the Rangs.mp3" preload="auto"></audio>
       </a-assets>
 
-      <a-sky color="#ECECEC" material="color: #4d4d4d" id="sky"></a-sky>
+      <a-sky color="#ECECEC" material="color: #17132f" id="sky"></a-sky>
       <a-entity class="lights" light="color: #BBB; type: ambient" data-aframe-default-light="" aframe-injected="" id="LightAmbient"></a-entity>
       <a-entity class="lights" light="intensity: 1.884; castShadow: true" position="-0.5 1 1" data-aframe-default-light="" aframe-injected="" id="LightDirectional"></a-entity>
       <a-entity camera="active: true" position="0 1.6 0" wasd-controls="" look-controls="" id="MainCam"></a-entity>
       <a-entity geometry="primitive: ring; radiusInner: 1.12; segmentsPhi: 10; segmentsTheta: 64; thetaLength: 360" material="color: #ff9494" id="StaticRing" position="0 1.5 -2"></a-entity>
       <a-entity id="BeatSpawner" position="0 0 0" beat_spawner="dur_ticks: 50" sound__song="positional: false; src: #song; autoplay: false"></a-entity>
+
+      <a-entity id="Floor" position="0 0 0" geometry="primitive: circle; radius: 2.5"  rotation="-90 0 0" material="color: #b6a3cd; flatShading: false; roughness: 0.5"></a-entity> geometry="primitive: circle; radius: 2.5"></a-entity>
+      <a-entity id="Floor-2" geometry="primitive: circle; radius: 3" rotation="-90 0 0" material="color: #74549a" position="0 -0.12743 0"></a-entity>
+
+      <a-entity id="tunnelLine" geometry="" scale="0.08 0.08 200" material="color: #00ffff"></a-entity>
+      <a-entity id="tunnelLine-2" geometry="" scale="0.08 0.08 200" position="0 3 0" material="color: #990d79"></a-entity>
+      <a-entity id="tunnelLine-3" geometry="" scale="0.08 0.08 200" position="1.5 1.5 0" material="color: #1bc931"></a-entity>
+      <a-entity id="tunnelLine-4" geometry="" scale="0.08 0.08 200" position="-1.5 1.5 0" material="color: #b8861d"></a-entity>
+      <a-entity id="tunnelLine-5" geometry="" scale="0.08 0.08 200" position="1.25 0.5 0" material="color: #20b572"></a-entity>
+      <a-entity id="tunnelLine-6" geometry="" scale="0.08 0.08 200" position="-1.25 0.5 0" material="color: #a6dc27"></a-entity>
+      <a-entity id="tunnelLine-7" geometry="" scale="0.08 0.08 200" position="-1.25 2.5 0" material="color: #ff040b"></a-entity>
+      <a-entity id="tunnelLine-8" geometry="" scale="0.08 0.08 200" position="1.25 2.5 0" material="color: #6f22cc"></a-entity>
+      
+      <a-entity id="speakerBox" geometry="" position="-2.18504 0.6329 -2.183" rotation="0 29.999999999999996 0" scale="1 1.81 1" material="color: #0000d5"></a-entity>
+      <a-entity id="tweeter" geometry="primitive: circle; radius: 0.2" position="-1.91806 1.12262 -1.67463" rotation="0 29.999999999999996 0" scale="1 1 0.2"></a-entity>
+      <a-entity id="speakerCircle" geometry="primitive: circle; radius: 0.35" position="-1.91806 0.46117 -1.67463" rotation="0 29.999999999999996 0" scale="1 1 0.2" material="color: #d28c5e"></a-entity>
+      <a-entity id="speakerCircle-2" geometry="primitive: circle; radius: 0.31" position="-1.9078 0.46117 -1.65868" rotation="0 29.999999999999996 0" scale="1 1 0.2" material="color: #f2e377"></a-entity>
+      <a-entity id="speakerCircle-3" geometry="primitive: circle; radius: 0.075" position="-1.90277 0.46829 -1.62714" rotation="0 29.999999999999996 0" scale="1 1 0.2" material="color: #c66217"></a-entity>
+      <a-entity id="tweeter-2" geometry="primitive: circle; radius: 0.17" position="-1.90298 1.12262 -1.64363" rotation="0 29.999999999999996 0" scale="1 1 0.2" material="color: #d38f9e"></a-entity>
 
     </a-scene>
   </body>
