@@ -38,12 +38,29 @@ aframe-watcher index.html
       <a-entity id="tunnelLine-7" geometry="" scale="0.08 0.08 200" position="-1.25 2.5 0" material="color: #ff040b"></a-entity>
       <a-entity id="tunnelLine-8" geometry="" scale="0.08 0.08 200" position="1.25 2.5 0" material="color: #6f22cc"></a-entity>
       
-      <a-entity id="speakerBox" geometry="" position="-2.18504 0.6329 -2.183" rotation="0 29.999999999999996 0" scale="1 1.81 1" material="color: #0000d5"></a-entity>
-      <a-entity id="tweeter" geometry="primitive: circle; radius: 0.2" position="-1.91806 1.12262 -1.67463" rotation="0 29.999999999999996 0" scale="1 1 0.2"></a-entity>
-      <a-entity id="speakerCircle" geometry="primitive: circle; radius: 0.35" position="-1.91806 0.46117 -1.67463" rotation="0 29.999999999999996 0" scale="1 1 0.2" material="color: #d28c5e"></a-entity>
-      <a-entity id="speakerCircle-2" geometry="primitive: circle; radius: 0.31" position="-1.9078 0.46117 -1.65868" rotation="0 29.999999999999996 0" scale="1 1 0.2" material="color: #f2e377"></a-entity>
-      <a-entity id="speakerCircle-3" geometry="primitive: circle; radius: 0.075" position="-1.90277 0.46829 -1.62714" rotation="0 29.999999999999996 0" scale="1 1 0.2" material="color: #c66217"></a-entity>
-      <a-entity id="tweeter-2" geometry="primitive: circle; radius: 0.17" position="-1.90298 1.12262 -1.64363" rotation="0 29.999999999999996 0" scale="1 1 0.2" material="color: #d38f9e"></a-entity>
+
+      <a-entity id="speaker1" rotation="0 30 0" position="-2.2 1.25 -2.8">
+        <a-entity id="speakerBox" geometry="" position="0 0 0" rotation="0 0 0" scale="1 1.81 1" material="color: #0000d5"></a-entity>
+        <a-entity id="tweeter" geometry="primitive: circle; radius: 0.2" position="0 0.51232 0.52675" rotation="0 0 0" scale="1 1 1">
+          <a-entity id="tweeter-2" geometry="primitive: circle; radius: 0.17" position="0 0 0.01217" rotation="0 0 0" scale="1 1 1" material="color: #d38f9e"></a-entity>
+        </a-entity>
+        <a-entity id="speakerCircle" geometry="primitive: circle; radius: 0.35" position="0 -0.2621 0.53771" rotation="0 0 0" scale="1 1 1" material="color: #d28c5e">
+          <a-entity id="speakerCircle-2" geometry="primitive: circle; radius: 0.31" position="0 0 0.02724" rotation="0 0 0" scale="1 1 1" material="color: #f2e377"></a-entity>
+          <a-entity id="speakerCircle-3" geometry="primitive: circle; radius: 0.075" position="0 0 0.0531" rotation="0 0 0" scale="1 1 1" material="color: #c66217"></a-entity>
+        </a-entity>
+      </a-entity>
+
+      <a-entity id="speaker2" rotation="0 -30 0" position="2.2 1.25 -2.8">
+        <a-entity id="speakerBox" geometry="" position="0 0 0" rotation="0 0 0" scale="1 1.81 1" material="color: #0000d5"></a-entity>
+        <a-entity id="tweeter" geometry="primitive: circle; radius: 0.2" position="0 0.51232 0.52675" rotation="0 0 0" scale="1 1 1">
+          <a-entity id="tweeter-2" geometry="primitive: circle; radius: 0.17" position="0 0 0.01217" rotation="0 0 0" scale="1 1 1" material="color: #d38f9e"></a-entity>
+        </a-entity>
+        <a-entity id="speakerCircle" geometry="primitive: circle; radius: 0.35" position="0 -0.2621 0.53771" rotation="0 0 0" scale="1 1 1" material="color: #d28c5e">
+          <a-entity id="speakerCircle-2" geometry="primitive: circle; radius: 0.31" position="0 0 0.02724" rotation="0 0 0" scale="1 1 1" material="color: #f2e377"></a-entity>
+          <a-entity id="speakerCircle-3" geometry="primitive: circle; radius: 0.075" position="0 0 0.0531" rotation="0 0 0" scale="1 1 1" material="color: #c66217"></a-entity>
+        </a-entity>
+      </a-entity>
+
 
     </a-scene>
   </body>
