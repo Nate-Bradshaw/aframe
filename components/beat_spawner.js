@@ -36,7 +36,7 @@ AFRAME.registerComponent('beat_spawner', {
 
         this.beatIndex = parseInt(0);
         this.startTime = null;
-        this.isPlaying = false;
+        this.mIsPlaying = false;
         this.elapsed = 0; //time elapsed in ms
         this.returnedNotes = 0;
 
@@ -56,14 +56,14 @@ AFRAME.registerComponent('beat_spawner', {
             //this.el.components.sound__song.playSound();
             //event.srcElement.components.beat_spawner.createBeat(0);
             event.srcElement.components.beat_spawner.beats = event.srcElement.components.beat_spawner.calculateBeatTimings();
-            isPlaying = true;
+            event.srcElement.components.beat_spawner.mIsPlaying = true;
         });
 
     },
 
     tick: function (time, timeDelta) {
-        console.log(this.isPlaying)
-        if (!this.isPlaying){
+        console.log(this.mIsPlaying)
+        if (!this.mIsPlaying){
             console.log("Changing Menu")
             if(this.beatIndex == this.returnedNotes){
                 //change back to menu scene
@@ -75,8 +75,8 @@ AFRAME.registerComponent('beat_spawner', {
             
         this.elapsed += timeDelta;
 
-        if(this.beatIndex == this.beats.length){
-            this.isPlaying = false;
+        if(this.beatIndex >= this.beats.length){
+            this.mIsPlaying = false;
             return;
         }
 
@@ -84,8 +84,6 @@ AFRAME.registerComponent('beat_spawner', {
             this.createBeat(this.beats[this.beatIndex].angle, this.elapsed)
             this.beatIndex++;
         }
-
-        this.deltaT++;
     },
 
     getCurrentTime: function () {
