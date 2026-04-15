@@ -106,7 +106,7 @@ AFRAME.registerComponent('beat_spawner', {
         })
 
         entityEl.setAttribute("material",{
-            color: "#86e0fe",
+            color: `hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`,
             transparent: true,
         })
 
