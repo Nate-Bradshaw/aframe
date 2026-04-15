@@ -8,6 +8,9 @@ window.addEventListener("load", () => {
   const instructionTxt = document.querySelector("#gameInstructions")
   const resetBtn = document.querySelector("#reset-btn")
   const menuImage = document.querySelector("#menuImage")
+  const easyBtn = document.querySelector("#easy")
+  const normalBtn = document.querySelector("#normal")
+  const hardBtn = document.querySelector("#hard")
 
   // Start Button action
   instructionbtn.addEventListener("click", () => {
@@ -27,12 +30,15 @@ window.addEventListener("load", () => {
     instructionTxt.setAttribute("visible", false);
     menuImage.setAttribute("visible", false);
     toggle_clickable(exitBtn, false);
+    toggle_clickable(easyBtn, false);
+    toggle_clickable(normalBtn, false);
+    toggle_clickable(hardBtn, false);
     toggle_clickable(switchBtn, true);
     toggle_clickable(instructionbtn, true);
   });
 
   // Reset Button action
-   resetBtn.addEventListener("click", () => {
+  resetBtn.addEventListener("click", () => {
       //Get camera and access its look-controls
       const mainCam = document.querySelector('#MainCam');
       const lookControls = mainCam.components['look-controls'];
@@ -45,7 +51,35 @@ window.addEventListener("load", () => {
 
   // Switches to the game
   switchBtn.addEventListener("click", () => {
-    window.location.href = "index.html";
+    // window.location.href = "index.html";
+    exampleMenu.setAttribute("visible", true);
+    toggle_clickable(easyBtn, true);
+    toggle_clickable(normalBtn, true);
+    toggle_clickable(hardBtn, true);
+    toggle_clickable(exitBtn, true);
+    toggle_clickable(switchBtn, false);
+    toggle_clickable(instructionbtn, false);
+  });
+
+  easyBtn.addEventListener("click", () => {
+    document.cookie = "difficulty=easy; path=/; Max-Age=3600"; // Creates cookie that lasts an hour
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 100); // Allows for cookie creation before reroute
+  });
+
+  normalBtn.addEventListener("click", () => {
+    document.cookie = "difficulty=normal; path=/; Max-Age=3600"; // Creates cookie that lasts an hour
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 100); // Allows for cookie creation before reroute
+  });
+
+  hardBtn.addEventListener("click", () => {
+    document.cookie = "difficulty=hard; path=/; Max-Age=3600"; // Creates cookie that lasts an hour
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 100); // Allows for cookie creation before reroute
   });
 });
 

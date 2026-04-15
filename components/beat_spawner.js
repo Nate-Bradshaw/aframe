@@ -1,4 +1,5 @@
 AFRAME.registerComponent('beat_spawner', {
+    
 
     //https://aframe.io/docs/1.7.0/core/component.html
 
@@ -40,6 +41,10 @@ AFRAME.registerComponent('beat_spawner', {
         this.elapsed = 0; //time elapsed in ms
         this.returnedNotes = 0;
 
+        this.difficulty = document.cookie.split("; ")[0].split("=")[1] // Grabs the difficulty part of the cookie
+
+        console.log(`Difficulty = ${this.difficulty}`)
+
         this.el.addEventListener("beat_hit", (event) => {
             //console.log("beat hit event");
             //console.log(event.detail);
@@ -65,12 +70,12 @@ AFRAME.registerComponent('beat_spawner', {
         if (!this.mIsPlaying){
             if(this.beatIndex == this.returnedNotes){
                 //change back to menu scene
-                const score = this.data.counter.getAttribute('text__counter', 'value')
-                document.cookie = "score=" + score.value + "; path=/; Max-Age=3600; SameSite=Lax";
+                const score = this.data.counter.getAttribute('text__counter', 'value') // Grabs score
+                document.cookie = "score=" + score.value + "; path=/; Max-Age=3600"; // Creates cookie that lasts an hour
 
                 setTimeout(() => {
                     window.location.href = "results.html";
-                }, 100);
+                }, 100); // Allows for cookie creation before reroute
             }
             return;
         }

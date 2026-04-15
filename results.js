@@ -4,9 +4,8 @@ window.addEventListener("load", () => {
     const restartBtn = document.querySelector("#restart-button")
     const exitBtn = document.querySelector("#exit-button")
     
-    const cookieValue = document.cookie
-        .split("=");
-    scoreTxt.setAttribute("value", `Your final score is: ${cookieValue[1]}`);
+    const cookieValue = document.cookie.split("; ")[1].split("=")[1] // Grabs the score part of the cookie
+    scoreTxt.setAttribute("value", `Your final score is: ${cookieValue}`);
 
     // Reset Button action
     resetBtn.addEventListener("click", () => {

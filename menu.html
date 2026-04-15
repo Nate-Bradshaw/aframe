@@ -122,6 +122,8 @@ aframe-watcher index.html
       color="#808080"
       visible="false"  
       ></a-box>
+
+      <!-- How To Play Menu -->
       <a-text id="gameInstructions"
       value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
       position="-1.44642 1.91139 -1.99643"
@@ -138,6 +140,40 @@ aframe-watcher index.html
       position="0.979 1.979 -1.989"
       visible="false"
       ></a-image>
+
+      <!-- Difficulty Menu -->
+      <a-entity id="easy" 
+      material="color: #d2ffc2" 
+      geometry="depth: 0; 
+      height: 0.35" 
+      position="-0.02541 2.26746 -1.993" 
+      class="not-clickable"
+      visible="false" 
+      animation__mouseenter="dur: 100; property: material.color; startEvents: mouseenter; to: #89B4F9" 
+      animation__mouseleave="dur: 100; property: material.color; startEvents: mouseleave; to: #d2ffc2">
+      &gt;</a-entity>
+
+      <a-entity id="normal" 
+      material="color: #ffbf75" 
+      geometry="depth: 0; 
+      height: 0.35" 
+      position="-0.02541 1.853 -1.993" 
+      class="not-clickable"
+      visible="false" 
+      animation__mouseenter="dur: 100; property: material.color; startEvents: mouseenter; to: #89B4F9" 
+      animation__mouseleave="dur: 100; property: material.color; startEvents: mouseleave; to: #ffbf75">
+      &gt;</a-entity>
+
+      <a-entity id="hard" 
+      material="color: #ff294d" 
+      geometry="depth: 0; 
+      height: 0.35" 
+      position="-0.02541 1.430 -1.993" 
+      class="not-clickable"
+      visible="false" 
+      animation__mouseenter="dur: 100; property: material.color; startEvents: mouseenter; to: #89B4F9" 
+      animation__mouseleave="dur: 100; property: material.color; startEvents: mouseleave; to: #ff294d">
+      &gt;</a-entity>
 
       <!-- Button to reset roration to forward facing -->
       <a-sphere 
