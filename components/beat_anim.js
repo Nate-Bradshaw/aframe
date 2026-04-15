@@ -9,6 +9,7 @@ AFRAME.registerComponent('beat_anim', {
     //see property types in component docs, can do custom types
     schema: {
         ring: {type: 'selector'}, //this should be the ring where the notes need to go
+        cursor: {type: 'selector'}, //this should be the ring where the notes need to go
         start_depth: {type: 'number'},
         angle: {type: 'number'}, //float
         dur: {type: 'int', default: 10}, //int, duration in miliseconds (changed to sec from tick to be fps independant)
@@ -53,18 +54,6 @@ AFRAME.registerComponent('beat_anim', {
                 this.el.components.material.color = "#00ff95";
             }
         })
-
-        this.el.addEventListener("mouseenter", function(event){
-            event.srcElement.components.beat_anim.lookedAt = true;
-            console.log("ms enter")
-        })
-
-        this.el.addEventListener("mouseleave", function(event){
-            event.srcElement.components.beat_anim.lookedAt = false;
-            console.log("ms exit")
-
-            //this.lookedAt = false;
-        })
     },
 
     tick: function (time, timeDelta) {
@@ -76,13 +65,15 @@ AFRAME.registerComponent('beat_anim', {
 
         const t = Math.min(this.elapsed / this.data.dur, 1);
 
-        //console.log(this.lookedAt)
-
-        if(this.lookedAt && this.gazeActive){
-            console.log("fooof")
-            this.el.emit("beat_hit", {hit: true, accurracy: 1}, true);
-            this.el.parentNode.removeChild(this.el); //!TEMP, MAKE BETTER FEEDBACK
-            return;
+        if(this.gazeActive){
+            const raycaster = this.data.cursor.components.raycaster;
+            if (raycaster) {
+                if(raycaster.intersectedEls.includes(this.el)){
+                    this.el.emit("beat_hit", {hit: true, accurracy: 1}, true);
+                    this.el.parentNode.removeChild(this.el); //!TEMP, MAKE BETTER FEEDBACK
+                    return;
+                }
+            }
         }
         
 

@@ -112,6 +112,7 @@ AFRAME.registerComponent('beat_spawner', {
 
         entityEl.setAttribute("beat_anim",{
             ring: "#StaticRing",
+            cursor: "#cursor",
             start_depth: -50,
             angle: angleIn,
             dur: this.data.dur,
