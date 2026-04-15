@@ -9,8 +9,6 @@ window.addEventListener("load", () => {
   const resetBtn = document.querySelector("#reset-btn")
   const menuImage = document.querySelector("#menuImage")
 
-  console.log(instructionTxt)
-
   // Start Button action
   instructionbtn.addEventListener("click", () => {
     exampleMenu.setAttribute("visible", true);

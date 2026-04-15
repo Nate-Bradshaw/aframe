@@ -62,13 +62,15 @@ AFRAME.registerComponent('beat_spawner', {
     },
 
     tick: function (time, timeDelta) {
-        console.log(this.mIsPlaying)
         if (!this.mIsPlaying){
-            console.log("Changing Menu")
             if(this.beatIndex == this.returnedNotes){
                 //change back to menu scene
-                
-                window.location.href = "menu.html";
+                const score = this.data.counter.getAttribute('text__counter', 'value')
+                document.cookie = "score=" + score.value + "; path=/; Max-Age=3600; SameSite=Lax";
+
+                setTimeout(() => {
+                    window.location.href = "results.html";
+                }, 100);
             }
             return;
         }

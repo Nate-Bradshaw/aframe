@@ -8,7 +8,7 @@ aframe-watcher index.html
     <!-- <link rel="stylesheet" href="./style.css">  -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
-    <script src="gameOverMenu.js"></script>
+    <script src="results.js"></script>
     <title>Vr project</title>
   </head>
   <body>
@@ -72,14 +72,20 @@ aframe-watcher index.html
       depth="0"
       color="#808080"
       ></a-box>
-      <a-text id="gameOverTxt"
-      value="Game Over"
-      position="-0.003 1.717 -1.996"
+      <a-text id="scoreTxt"
+      value="Test"
+      position="-1.44642 1.91139 -1.99643"
+      align="center" 
       color="#111" 
       scale="0.4 0.5 1" 
-      text="align: center; 
-      width: 17.870">
+      text="align: left; 
+      width: 4.8">
       </a-text>
+      <a-image 
+      id="menuImage"
+      src="images/Kevin_Macleod.jpg"
+      position="0.979 1.979 -1.989"
+      ></a-image>
 
       <!-- Button to reset roration to forward facing -->
       <a-sphere 
@@ -92,6 +98,7 @@ aframe-watcher index.html
       animation__mouseenter="property: material.color; to: #F5819E; dur: 100; startEvents: mouseenter"
       animation__mouseleave="property: material.color; to: #EF2D5E; dur: 100; startEvents: mouseleave">
     </a-sphere>
+    <a-entity geometry="primitive: plane" material="color: #ff0000" id="forward_arrow" rotation="-90 0 0" position="0 0.00471 -0.49146" scale="0.06 1 1"></a-entity>
     </a-scene>
   </body>
 </html>
