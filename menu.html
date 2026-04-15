@@ -40,7 +40,9 @@ aframe-watcher index.html
       </a-camera>
 
       <!-- Ground + light so you can see -->
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="20" height="20" color="#DDD"></a-plane>
+      <a-entity id="Floor" position="0 0 0" geometry="primitive: circle; radius: 2.5"  rotation="-90 0 0" material="color: #b6a3cd; flatShading: false; roughness: 0.5"></a-entity> geometry="primitive: circle; radius: 2.5"></a-entity>
+      <a-entity id="Floor-2" geometry="primitive: circle; radius: 3" rotation="-90 0 0" material="color: #74549a" position="0 -0.12743 0"></a-entity>
+
       <a-light type="ambient" intensity="0.9"></a-light>
 
       <!-- Labels -->
@@ -149,6 +151,7 @@ aframe-watcher index.html
       animation__mouseleave="property: material.color; to: #EF2D5E; dur: 100; startEvents: mouseleave">
     </a-sphere>
     <a-entity geometry="primitive: plane" material="color: #ff0000" id="forward_arrow" rotation="-90 0 0" position="0 0.00471 -0.49146" scale="0.06 1 1"></a-entity>
+
     </a-scene>
   </body>
 </html>
