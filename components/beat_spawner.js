@@ -38,10 +38,12 @@ AFRAME.registerComponent('beat_spawner', {
         this.startTime = null;
         this.isPlaying = false;
         this.elapsed = 0; //time elapsed in ms
+        this.returnedNotes = 0;
 
         this.el.addEventListener("beat_hit", (event) => {
             //console.log("beat hit event");
             //console.log(event.detail);
+            this.returnedNotes++;
             if(event.detail.hit){
                 this.data.counter.setAttribute('text__counter', 'value', parseInt(this.data.counter.components.text__counter.data.value) + 1);
             }
@@ -60,16 +62,14 @@ AFRAME.registerComponent('beat_spawner', {
     },
 
     tick: function (time, timeDelta) {
-        if (!this.isPlaying) return;
-        
+        if (!this.isPlaying){
+            if(beatIndex == returnedNotes){
+                //change back to menu scene
+            }
+            return;
+        }
+            
         this.elapsed += timeDelta;
-
-        //console.log(this.elapsed);
-        //console.log(this.beatIndex);
-        //console.log(this.beats);
-        //console.log(this.beats[this.beatIndex].timeMs);
-        //console.log(this.data.dur);
-        //console.log(this.beats[this.beatIndex].timeMs + this.data.dur);
 
         if(this.beatIndex == this.beats.length){
             this.isPlaying = false;
@@ -81,8 +81,6 @@ AFRAME.registerComponent('beat_spawner', {
             this.beatIndex++;
         }
 
-
-        
         this.deltaT++;
     },
 
