@@ -62,9 +62,13 @@ AFRAME.registerComponent('beat_spawner', {
     },
 
     tick: function (time, timeDelta) {
+        console.log(this.isPlaying)
         if (!this.isPlaying){
-            if(beatIndex == returnedNotes){
+            console.log("Changing Menu")
+            if(this.beatIndex == this.returnedNotes){
                 //change back to menu scene
+                
+                window.location.href = "menu.html";
             }
             return;
         }
