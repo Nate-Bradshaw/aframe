@@ -35,7 +35,7 @@ AFRAME.registerComponent('beat_anim', {
 
         var x = this.startPos.x + (this.radius * Math.cos(THREE.MathUtils.degToRad(this.data.angle)));
         var y = this.startPos.y + (this.radius * Math.sin(THREE.MathUtils.degToRad(this.data.angle)));
-        this.endPos = new THREE.Vector3(x, y, this.data.ring.object3D.position.z);
+        this.endPos = new THREE.Vector3(x, y, this.data.ring.object3D.position.z + 0.1);
 
         this.alphaElapsed = 0;
 
