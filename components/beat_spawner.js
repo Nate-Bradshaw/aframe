@@ -36,7 +36,7 @@ AFRAME.registerComponent('beat_spawner', {
 
         this.beatIndex = parseInt(0);
         this.startTime = null;
-        this.isPlaying = false;
+        this.mmisPlaying = false;
         this.elapsed = 0; //time elapsed in ms
         this.returnedNotes = 0;
 
@@ -56,7 +56,7 @@ AFRAME.registerComponent('beat_spawner', {
             //this.el.components.sound__song.playSound();
             //event.srcElement.components.beat_spawner.createBeat(0);
             event.srcElement.components.beat_spawner.beats = event.srcElement.components.beat_spawner.calculateBeatTimings();
-            isPlaying = true;
+            event.srcElement.components.beat_spawner.mIsPlaying = true;
         });
 
     },
@@ -78,7 +78,7 @@ AFRAME.registerComponent('beat_spawner', {
         this.elapsed += timeDelta;
 
         if(this.beatIndex == this.beats.length){
-            this.isPlaying = false;
+            this.mIsPlaying = false;
             return;
         }
 
@@ -86,14 +86,12 @@ AFRAME.registerComponent('beat_spawner', {
             this.createBeat(this.beats[this.beatIndex].angle, this.elapsed)
             this.beatIndex++;
         }
-
-        this.deltaT++;
     },
 
     getCurrentTime: function () {
         //console.log(this.el.components.sound__song)
         const audioEl = this.el.components.sound__song.pool.children[0];
-        if (!audioEl || !audioEl.isPlaying) return 0; //not playing
+        if (!audioEl || !audioEl.mIsPlaying) return 0; //not playing
         //console.log(audioEl.context.currentTime - audioEl._startedAt)
         return audioEl.context.currentTime - audioEl._startedAt; //returns the time in the audio
     },
