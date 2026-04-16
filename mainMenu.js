@@ -6,18 +6,23 @@ window.addEventListener("load", () => {
   const exitBtn = document.querySelector("#exit-button")
   const menuTxt = document.querySelector("#menuText")
   const instructionTxt = document.querySelector("#gameInstructions")
+  const easyTxt = document.querySelector("#easyTxt")
+  const normalTxt = document.querySelector("#normalTxt")
+  const hardTxt = document.querySelector("#hardTxt")
+  const exitTxt = document.querySelector("#exitTxt")
   const resetBtn = document.querySelector("#reset-btn")
   const menuImage = document.querySelector("#menuImage")
   const easyBtn = document.querySelector("#easy")
   const normalBtn = document.querySelector("#normal")
   const hardBtn = document.querySelector("#hard")
 
-  // Start Button action
+  // How To Play Button action
   instructionbtn.addEventListener("click", () => {
     exampleMenu.setAttribute("visible", true);
     menuTxt.setAttribute("visible", true);
     instructionTxt.setAttribute("visible", true);
     menuImage.setAttribute("visible", true);
+    exitTxt.setAttribute("visible", true);
     toggle_clickable(switchBtn, false);
     toggle_clickable(instructionbtn, false);
     toggle_clickable(exitBtn, true);
@@ -29,6 +34,10 @@ window.addEventListener("load", () => {
     menuTxt.setAttribute("visible", false);
     instructionTxt.setAttribute("visible", false);
     menuImage.setAttribute("visible", false);
+    easyTxt.setAttribute("visible", false);
+    normalTxt.setAttribute("visible", false);
+    hardTxt.setAttribute("visible", false);
+    exitTxt.setAttribute("visible", false);
     toggle_clickable(exitBtn, false);
     toggle_clickable(easyBtn, false);
     toggle_clickable(normalBtn, false);
@@ -53,6 +62,10 @@ window.addEventListener("load", () => {
   switchBtn.addEventListener("click", () => {
     // window.location.href = "index.html";
     exampleMenu.setAttribute("visible", true);
+    easyTxt.setAttribute("visible", true);
+    normalTxt.setAttribute("visible", true);
+    hardTxt.setAttribute("visible", true);
+    exitTxt.setAttribute("visible", true);
     toggle_clickable(easyBtn, true);
     toggle_clickable(normalBtn, true);
     toggle_clickable(hardBtn, true);
