@@ -162,6 +162,8 @@ AFRAME.registerComponent('beat_spawner', {
             grace_time_post: 500,
         })
 
+        entityEl.setAttribute("class", "beat");
+
         entityEl.setAttribute('id', i.toString());
     },
 
