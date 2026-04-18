@@ -50,13 +50,19 @@ AFRAME.registerComponent('beat_spawner', {
                         [0.5,90],[0.5,180],[0.5,270],[0.5,0],[0.5,90],[0.5,0],[1,90],[1,0],[1,180],[1,90],[1,270],[1,90],[1,0],[1,270],[1,180],[0.5,90],[0.5,0],[1,45],[1,225],[1,0],   //4 bars
                         ],
 
-            beatMapTimingTest: [[0.5,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0]]
+            beatMapTimingTest: [[0.5,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],
+                                [1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],
+                                [1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],
+                                [1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0]
+                            ],
+
+            beatMapSkip: [[0.5,0]]
             
 
             // beatMapArr: [[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],]
         }
 
-        this.isActive = false;
+        this.misActive = false;
 
         this.el.addEventListener("activate", (event) =>{
             this.beatIndex = parseInt(0);
@@ -65,7 +71,7 @@ AFRAME.registerComponent('beat_spawner', {
             this.elapsed = 0; //time elapsed in ms
             this.returnedNotes = 0;
 
-            console.log(event)
+            this.data.counter.setAttribute('text__counter', 'value', 0);
 
             //0 = easy, 1 = med, 2 = hard
             this.difficulty = event.detail.difficulty
@@ -77,7 +83,7 @@ AFRAME.registerComponent('beat_spawner', {
             this.beats = this.calculateBeatTimings();
             this.mIsPlaying = true;
 
-            this.isActive = true;
+            this.misActive = true;
 
             this.el.components.sound__song.playSound();
 
@@ -97,16 +103,14 @@ AFRAME.registerComponent('beat_spawner', {
     },
 
     tick: function (time, timeDelta) {
-        if(!this.isActive) return;
+        if(!this.misActive) return;
         if (!this.mIsPlaying){
             if(this.beatIndex == this.returnedNotes){
-                //change back to menu scene
-                const score = this.data.counter.getAttribute('text__counter', 'value') // Grabs score
-                document.cookie = "score=" + score.value + "; path=/; Max-Age=3600"; // Creates cookie that lasts an hour
+                //change back to menu scene                
+                this.el.emit("change_score_scene", {score: this.data.counter.components.text__counter.data.value, difficulty: this.difficulty}, true);
+                this.el.components.sound__song.stopSound();
 
-                setTimeout(() => {
-                    window.location.href = "results.html";
-                }, 100); // Allows for cookie creation before reroute
+                this.misActive = false;
             }
             return;
         }
@@ -185,6 +189,7 @@ AFRAME.registerComponent('beat_spawner', {
         }
 
         //beatarr = this.songObj.beatMapTimingTest;
+        beatarr = this.songObj.beatMapSkip;
 
         beatarr.forEach((beat, index) => {
             const [delayNotes, angle] = beat;

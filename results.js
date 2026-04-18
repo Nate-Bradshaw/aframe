@@ -1,14 +1,14 @@
 window.addEventListener("load", () => {
-    const scoreTxt = document.querySelector("#scoreTxt")
-    const resetBtn = document.querySelector("#reset-btn")
-    const restartBtn = document.querySelector("#restart-button")
-    const exitBtn = document.querySelector("#exit-button")
+    const r_scoreTxt = document.querySelector("#scoreTxt")
+    const r_resetBtn = document.querySelector("#reset-btn")
+    const r_restartBtn = document.querySelector("#restart-button")
+    const r_exitBtn = document.querySelector("#exit-button")
     
     const cookieValue = document.cookie.split("; ")[1].split("=")[1] // Grabs the score part of the cookie
-    scoreTxt.setAttribute("value", `Your final score is: ${cookieValue}`);
+    r_scoreTxt.setAttribute("value", `Your final score is: ${cookieValue}`);
 
     // Reset Button action
-    resetBtn.addEventListener("click", () => {
+    r_resetBtn.addEventListener("click", () => {
       //Get camera and access its look-controls
       const mainCam = document.querySelector('#MainCam');
       const lookControls = mainCam.components['look-controls'];
@@ -20,12 +20,12 @@ window.addEventListener("load", () => {
     });
     
     // Retry
-    restartBtn.addEventListener("click", () => {
+    r_restartBtn.addEventListener("click", () => {
         window.location.href = "index.html";
     });
 
     // Main Menu
-    exitBtn.addEventListener("click", () => {
+    r_exitBtn.addEventListener("click", () => {
         window.location.href = "menu.html";
     });
 });

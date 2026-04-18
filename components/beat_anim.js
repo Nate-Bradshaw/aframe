@@ -48,7 +48,6 @@ AFRAME.registerComponent('beat_anim', {
             if(gazeActive){
                 //idea here is: if looked at in the gaze window, the beat_spawner gets notified for score ect
                 //colour change for feedback
-                //! untested until gaze interaction with beats is done
                 this.el.emit("beat_hit", {hit: true, accurracy: Math.abs(this.accumulatedT - this.data.dur)}, true);
                 gazeActive = false;
                 this.el.components.material.color = "#00ff95";
