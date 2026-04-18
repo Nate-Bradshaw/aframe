@@ -77,7 +77,8 @@ window.addEventListener("load", () => {
   easyBtn.addEventListener("click", () => {
     document.cookie = "difficulty=easy; path=/; Max-Age=3600"; // Creates cookie that lasts an hour
     setTimeout(() => {
-        window.location.href = "index.html";
+        $("#includedScene").load('index.html');
+        $("#MainCam").load('index.html #gameCam');
     }, 100); // Allows for cookie creation before reroute
   });
 
