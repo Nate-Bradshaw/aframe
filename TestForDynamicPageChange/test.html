@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--
+aframe-watcher index.html
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <!-- <link rel="stylesheet" href="./style.css">  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+    <script src="components/jquery-4.0.0.min.js"></script>
+    <script src="components\beat_anim.js"></script>
+    <script src="components\beat_spawner.js"></script>
+    <script>
+      window.addEventListener("load", () => {
+        $("#includedScene").load('menu.html', function() {
+          $.getScript("testMainMenu.js", function() {
+            initMenu();
+          });
+        });
+      });
+    </script> 
+    <!-- <script src="mainMenu.js"></script>
+    <script src="components\beat_anim.js"></script>
+    <script src="components\beat_spawner.js"></script> -->
+
+    <title>Vr project</title>
+  </head>
+  <body>
+    <a-scene>
+      <!-- This is now the only camera object -->
+      <a-camera id="MainCam">
+        <a-entity
+          id="RingOver"
+          cursor="fuse: true; fuse-timeout: 1500"
+          raycaster="objects: .clickable; recursive: false"
+          position="0 0 -1"
+          
+          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;"
+          material="color: green; shader: flat"
+            
+          animation__fusing="property: geometry.thetaLength; from: 360; to: 0; dur: 1500; startEvents: fusing; easing: linear"
+          animation__reset="property: geometry.thetaLength; to: 360; dur: 50; startEvents: mouseleave">
+
+          <!-- Outer ring -->
+          <a-entity
+            id="RingUnder" 
+            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+            material="color: white; shader: flat"
+            position="0 0 -0.0001">  
+          </a-entity>
+
+        </a-entity>
+      </a-camera>
+      <a-entity id="includedScene"></a-entity>
+    </a-scene>
+  </body>
+</html>
