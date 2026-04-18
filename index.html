@@ -7,8 +7,8 @@ aframe-watcher index.html
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./style.css"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
-    <script src="script.js"></script>
+    <!-- <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+    <script src="script.js"></script> -->
     <script src="components\beat_anim.js"></script>
     <script src="components\beat_spawner.js"></script>
     <title>Vr project</title>
@@ -22,8 +22,10 @@ aframe-watcher index.html
       <a-sky color="#ECECEC" material="color: #17132f" id="sky"></a-sky>
       <a-entity class="lights" light="color: #BBB; type: ambient" data-aframe-default-light="" aframe-injected="" id="LightAmbient"></a-entity>
       <a-entity class="lights" light="intensity: 1.884; castShadow: true" position="-0.5 1 1" data-aframe-default-light="" aframe-injected="" id="LightDirectional"></a-entity>
-      <a-entity camera="active: true" position="0 1.6 0" wasd-controls="" look-controls="" id="MainCam">
-        <a-entity id="cursor" raycaster="" cursor__m="" position="0 0 -0.1" geometry="primitive: circle; radius: 0.001" scale="0.5 0.5 0.5"></a-entity>
+      <a-entity id="gameCam" camera="active: true" position="0 1.6 0" wasd-controls="" look-controls="" id="MainCam">
+        <!-- Cursor has been commented out of this page as only camera object in test.html -->
+
+        <!-- <a-entity id="cursor" raycaster="" cursor__m="" position="0 0 -0.1" geometry="primitive: circle; radius: 0.001" scale="0.5 0.5 0.5"></a-entity> -->
       </a-entity>
       <a-entity geometry="primitive: ring; radiusInner: 1.12; segmentsPhi: 10; segmentsTheta: 64; thetaLength: 360" material="color: #ff9494" id="StaticRing" position="0 1.5 -2"></a-entity>
       <a-entity id="BeatSpawner" position="0 0 0" beat_spawner="dur_ticks: 50; counter: #counter" sound__song="positional: false; src: #song; autoplay: false"></a-entity>
