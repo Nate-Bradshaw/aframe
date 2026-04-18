@@ -26,15 +26,15 @@ AFRAME.registerComponent('beat_spawner', {
             // limit angles to increments of 45 degrees
             //45, 90, 135, 180, 225, 270, 315
 
-            beatMapArrEasy: [[1,90],[3,180],[2,270],[3,180],[2,0],[3,180],[2,270],   //4 bars
-                        [3,0],[2,90],[1,180],[2,270],[3,359],[1,90],[3,0],[0.5,45],[0.5,50],   //4 bars  
-                        [2,90],[1,10],[2,0],[3,250],[1,225],[1,225],[0.5,0],[0.5,135],[2,180],[3,270],  //4 bars  
+            beatMapArrEasy: [[1.5,90],[3,180],[2,270],[3,180],[2,0],[3,180],[2,270],   //4 bars
+                        [3,0],[2,90],[1,180],[2,270],[3,45],[1,90],[3,0],[0.5,45],[0.5,0],   //4 bars  
+                        [2,90],[1,0],[2,90],[3,225],[1,270],[1,315],[0.5,0],[0.5,135],[2,180],[3,270],  //4 bars  
                         [1,225],[1,0],[1,180],[1,200],[3,90],[2,45],[1,100],[1,45],[2,90],[4,320],   //4 and a quarter  
-                        [3,0],[3,359],[3,10],[0.5,270],[1,360],[0.5,0],[1,3],[2,225],[1,0],   //3 and 3 quarters                          
+                        [3,0],[3,315],[3,0],[0.5,270],[1,0],[0.5,0],[1,3],[2,225],[1,0],   //3 and 3 quarters                          
                         [4,90],[4,270],[4,90],[4,270]   //4 bars
                         ],                         
 
-            beatMapArrMed: [[1,90],[3,180],[1,90],[3,0],[1,90],[3,180],[1,90],[3,270],   //4 bars
+            beatMapArrMed: [[1.5,90],[3,180],[1,90],[3,0],[1,90],[3,180],[1,90],[3,270],   //4 bars
                         [1,270],[2,135],[1,225],[1,180],[2,135],[1,135],[1,90],[2,45],[1,45],[0.5,0],[2,315],[1,270],   //4 bars
                         [1,90],[1,45],[2,0],[1,225],[1,225],[2,180],[1,0],[1,135],[2,180],[1,0],[1,315],[2,270],  //4 bars
                         [1,225],[1,135],[2,0],[1,180],[1,0],[2,45],[1,135],[1,45],[2,90],[1,225],[1,315],[3,270],   //4 and a quarter
@@ -42,50 +42,62 @@ AFRAME.registerComponent('beat_spawner', {
                         [4,90],[4,180],[4,270],[4,0]   //4 bars
                         ],
 
-            beatMapArrHard: [[1,180],[1,18],[1,90],[2,0],[1,90],[3,180],[1,270],[1,70],[0.5,0],[0.5,180],[2,130],[2,0],    //4 bars
-                        [1,300],[2,100],[1,270],[1,90],[2,180],[1,0],[1,180],[1,45],[1,90],[0.5,0],[1.5,315],[2,90], [1,0],   //4 bars
+            beatMapArrHard: [[1.5,180],[1,45],[1,90],[2,0],[1,90],[3,180],[1,270],[1,90],[0.5,0],[0.5,180],[2,135],[2,0],    //4 bars
+                        [1,315],[2,90],[1,270],[1,90],[2,180],[1,0],[1,180],[1,45],[1,90],[0.5,0],[1.5,315],[2,90], [1,0],   //4 bars
                         [2,0],[0.5,180],[1,0],[0.5,225],[1,30],[2,180],[1,0],[1,270],[2,180],[1,0],[1,315],[2,90],[1,180],  //4 bars
-                        [0.5,225],[1,0],[2,190],[1,270],[1,0],[2,45],[1,135],[1,180],[2,90],[1,250],[1.5,315],[3,110],   //4 and a quarter
-                        [1,0],[1,330],[2,190],[2,45],[1,200],[1,90],[2,30],[2,225],[1,90],[0.5,200],[0.5,300],[1,0],   //3 and 3 quarters
-                        [0.5,90],[0.5,180],[0.5,270],[0.5,0],[0.5,90],[0.5,0],[1,90],[1,0],[1,190],[1,90],[1,270],[1,90],[1,0],[1,270],[1,180],[0.5,90],[0.5,0],[1,45],[1,256],[1,0],   //4 bars
+                        [0.5,225],[1,0],[2,190],[1,270],[1,0],[2,45],[1,135],[1,180],[2,90],[1,250],[1.5,315],[3,90],   //4 and a quarter
+                        [1,0],[1,315],[2,190],[2,45],[1,225],[1,90],[2,0],[2,225],[1,90],[0.5,225],[0.5,315],[1,0],   //3 and 3 quarters
+                        [0.5,90],[0.5,180],[0.5,270],[0.5,0],[0.5,90],[0.5,0],[1,90],[1,0],[1,180],[1,90],[1,270],[1,90],[1,0],[1,270],[1,180],[0.5,90],[0.5,0],[1,45],[1,225],[1,0],   //4 bars
                         ],
+
+            beatMapTimingTest: [[0.5,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0]]
             
 
             // beatMapArr: [[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],[0.5,0],]
         }
 
-        this.beatIndex = parseInt(0);
-        this.startTime = null;
-        this.mmisPlaying = false;
-        this.elapsed = 0; //time elapsed in ms
-        this.returnedNotes = 0;
+        this.isActive = false;
 
-        this.difficulty = document.cookie.split("; ")[0].split("=")[1] // Grabs the difficulty part of the cookie
+        this.el.addEventListener("activate", (event) =>{
+            this.beatIndex = parseInt(0);
+            this.startTime = null;
+            this.mmisPlaying = false;
+            this.elapsed = 0; //time elapsed in ms
+            this.returnedNotes = 0;
 
-        console.log(`Difficulty = ${this.difficulty}`)
+            console.log(event)
+
+            //0 = easy, 1 = med, 2 = hard
+            this.difficulty = event.detail.difficulty
+
+            console.log(`Difficulty = ${this.difficulty}`)
+
+            console.log("sound playing")
+
+            this.beats = this.calculateBeatTimings();
+            this.mIsPlaying = true;
+
+            this.isActive = true;
+
+            this.el.components.sound__song.playSound();
+
+            // THEE.js audiocontext is a better way of keeping track of audio as its synced to it
+            this.startedAt = THREE.AudioContext.getContext().currentTime;  // in seconds
+        });
 
         this.el.addEventListener("beat_hit", (event) => {
             //console.log("beat hit event");
             //console.log(event.detail);
             this.returnedNotes++;
+            console.log(this.data.counter.components.text__counter.data.value)
             if(event.detail.hit){
                 this.data.counter.setAttribute('text__counter', 'value', parseInt(this.data.counter.components.text__counter.data.value) + 1);
             }
         });
-
-
-        this.el.addEventListener('loaded', function(event){
-            console.log("sound playing")
-            event.srcElement.components.sound__song.playSound(); //note: sound will not play if there was no user interaction, start on the /menu page
-            //this.el.components.sound__song.playSound();
-            //event.srcElement.components.beat_spawner.createBeat(0);
-            event.srcElement.components.beat_spawner.beats = event.srcElement.components.beat_spawner.calculateBeatTimings();
-            event.srcElement.components.beat_spawner.mIsPlaying = true;
-        });
-
     },
 
     tick: function (time, timeDelta) {
+        if(!this.isActive) return;
         if (!this.mIsPlaying){
             if(this.beatIndex == this.returnedNotes){
                 //change back to menu scene
@@ -99,7 +111,7 @@ AFRAME.registerComponent('beat_spawner', {
             return;
         }
             
-        this.elapsed += timeDelta;
+        this.elapsed = (THREE.AudioContext.getContext().currentTime - this.startedAt) * 1000; // convert to ms
 
         if(this.beatIndex == this.beats.length){
             this.mIsPlaying = false;
@@ -158,19 +170,21 @@ AFRAME.registerComponent('beat_spawner', {
         var beatarr;
 
         switch (this.difficulty) {
-            case "easy":
+            case 0:
                 beatarr = this.songObj.beatMapArrEasy;
                 break;
-            case "normal":
+            case 1:
                 beatarr = this.songObj.beatMapArrMed;
                 break;
-            case "hard":
+            case 2:
                 beatarr = this.songObj.beatMapArrHard;
                 break;
             default:
                 beatarr = this.songObj.beatMapArrEasy;
                 break;
         }
+
+        //beatarr = this.songObj.beatMapTimingTest;
 
         beatarr.forEach((beat, index) => {
             const [delayNotes, angle] = beat;

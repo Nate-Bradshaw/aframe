@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+    <script src="game.js"></script>
+
+    <script src="components\beat_anim.js"></script>
+    <script src="components\beat_spawner.js"></script>
+    <title>Vr project</title>
+</head>
+<body>
+    <a-scene>
+        <a-assets>
+            <audio id="song" src="music\Lord of the Rangs.mp3" preload="auto"></audio>
+        </a-assets>
+        <!-- these will be global elements -->
+        <a-sky color="#ECECEC" material="color: #17132f" id="sky"></a-sky>
+
+        <a-camera id="MainCam">
+            <a-entity
+                id="RingOver"
+                cursor="fuse: true; fuse-timeout = 1000"
+                raycaster="objects: .clickable"
+                position="0 0 -1"
+                
+                geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;"
+                material="color: green; shader: flat"
+                
+                animation__fusing="property: geometry.thetaLength; from: 360; to: 0; dur: 1500; startEvents: fusing; easing: linear"
+                animation__reset="property: geometry.thetaLength; to: 360; dur: 50; startEvents: mouseleave">
+
+                <!-- Outer ring -->
+                <a-entity
+                id="RingUnder" 
+                geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+                material="color: white; shader: flat"
+                position="0 0 -0.0001">  
+                </a-entity>
+            </a-entity>
+            <!-- this cursor is used to interact with the game, janky but works -->
+            <a-entity id="cursor" raycaster="" cursor__m="" position="0 0 -0.1" geometry="primitive: circle; radius: 0.001" scale="0.5 0.5 0.5"></a-entity>
+        </a-camera>
+
+        <a-entity id="Floor" position="0 0 0" geometry="primitive: circle; radius: 2.5"  rotation="-90 0 0" material="color: #b6a3cd; flatShading: false; roughness: 0.5"></a-entity> geometry="primitive: circle; radius: 2.5"></a-entity>
+        <a-entity id="Floor-2" geometry="primitive: circle; radius: 3" rotation="-90 0 0" material="color: #74549a" position="0 -0.12743 0"></a-entity>
+
+        <a-light type="ambient" intensity="0.9"></a-light>
+
+            <!-- Button to reset roration to forward facing -->
+            <a-sphere id = "reset-btn"
+                position="0 -0.75 0" 
+                radius="1" 
+                color="#EF2D5E"
+                class="clickable"
+
+                animation__mouseenter="property: material.color; to: #F5819E; dur: 100; startEvents: mouseenter"
+                animation__mouseleave="property: material.color; to: #EF2D5E; dur: 100; startEvents: mouseleave">
+            </a-sphere>
+
+            <a-entity id="forward_arrow"
+                geometry="primitive: plane" material="color: #ff0000" rotation="-90 0 0" position="0 0.00471 -0.49146" scale="0.06 1 1">
+            </a-entity>
+            <!-- end Button to reset roration to forward facing -->
+
+        <a-entity id="scene-menu" visible="true">
+            <!-- Labels -->
+            <a-text id="playGameText"
+                value="Play Game"
+                position="1.5 2.2 -3"
+                align="center"
+                width="6"
+                color="#111"
+            ></a-text>
+            
+            <a-text id="menuText"
+                value="Menu" 
+                position="0.00369 2.699 -1.95343" 
+                align="center" 
+                width="6" 
+                color="#111"
+                visible="false"
+            ></a-text>
+
+            <a-text id="statusText-2" 
+                value="How To Play" 
+                position="-1.5 2.2 -3" 
+                align="center" 
+                width="6" 
+                color="#111" 
+                value: How To Play;
+            ></a-text>
+
+            <a-text id="easyTxt" 
+                position="-0.0313 2.27475 -1.9677" 
+                align="center" 
+                width="6" 
+                color="#111" 
+                text="value: Easy"
+                visible="false">
+            </a-text>
+
+            <a-text id="normalTxt" 
+                position="-0.0313 1.86995 -1.9677" 
+                align="center" 
+                width="6" 
+                color="#111" 
+                text="value: Normal"
+                visible="false">
+            </a-text>
+
+            <a-text id="hardTxt" 
+                position="-0.0313 1.45836 -1.9677" 
+                align="center" 
+                width="6" 
+                color="#111" 
+                text="value: Hard"
+                visible="false">
+            </a-text>
+
+            <a-text id="exitTxt" 
+                position="-0.0313 0.81992 -1.9677" 
+                align="center" 
+                width="6" 
+                color="#111" 
+                text="value: Exit"
+                visible="false">
+            </a-text>
+            <!-- end labels -->
+
+            <!-- Buttons -->
+            <a-box id="switch-button"
+                class="clickable"
+                position="1.5 1.5 -3"
+                depth="0"
+                height="0.6"
+                width="1.2"
+                color="#3B82F6"
+
+                animation__mouseenter="property: material.color; to: #89B4F9; dur: 100; startEvents: mouseenter"
+                animation__mouseleave="property: material.color; to: #3B82F6; dur: 100; startEvents: mouseleave">
+            </a-box>
+
+            <a-entity id="exit-button"
+                material="color:#FFC0CB" 
+                geometry="depth: 0; height: 0.350; width: 1"
+                position="-0.024 0.802 -1.993" 
+                class="not-clickable" 
+                visible="false"
+                animation__mouseenter="property: material.color; to: #89B4F9; dur: 100; startEvents: mouseenter"
+                animation__mouseleave="property: material.color; to: #FFC0CB; dur: 100; startEvents: mouseleave">
+            </a-entity>
+
+            <a-entity id="instruction-btn" 
+                position="-1.5 1.5 -3" 
+                geometry="box"
+                material="color: #FF0000" 
+                scale="1 0.6 0.1"
+                class="clickable"
+                
+                animation__mouseenter="property: material.color; to: #89B4F9; dur: 100; startEvents: mouseenter"
+                animation__mouseleave="property: material.color; to: #FF0000; dur: 100; startEvents: mouseleave">
+            </a-entity>
+            <!-- end buttons -->
+
+            <!-- Menu Contents -->
+            <a-box id="example-menu"
+                position="0 1.5 -2"
+                height="2"
+                width="3"
+                depth="0"
+                color="#808080"
+                visible="false">
+            </a-box>
+
+            <!-- How To Play Menu -->
+            <a-text id="gameInstructions"
+                value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                position="-1.44642 1.91139 -1.99643"
+                align="center" 
+                color="#111" 
+                scale="0.4 0.5 1" 
+                text="align: left; 
+                width: 4.8"
+                visible="false">
+            </a-text>
+
+            <a-image id="menuImage"
+                src="images/Kevin_Macleod.jpg"
+                position="0.979 1.979 -1.989"
+                visible="false">
+            </a-image>
+            <!-- end How To Play Menu -->
+
+            <!-- Difficulty Menu -->
+            <a-entity id="easy" 
+                material="color: #d2ffc2" 
+                geometry="depth: 0; 
+                height: 0.35" 
+                position="-0.02541 2.26746 -1.993" 
+                class="not-clickable"
+                visible="false" 
+                animation__mouseenter="dur: 100; property: material.color; startEvents: mouseenter; to: #89B4F9" 
+                animation__mouseleave="dur: 100; property: material.color; startEvents: mouseleave; to: #d2ffc2">
+            </a-entity>
+
+            <a-entity id="normal" 
+                material="color: #ffbf75" 
+                geometry="depth: 0; 
+                height: 0.35" 
+                position="-0.02541 1.853 -1.993" 
+                class="not-clickable"
+                visible="false" 
+                animation__mouseenter="dur: 100; property: material.color; startEvents: mouseenter; to: #89B4F9" 
+                animation__mouseleave="dur: 100; property: material.color; startEvents: mouseleave; to: #ffbf75">
+            </a-entity>
+
+            <a-entity id="hard" 
+                material="color: #ff294d" 
+                geometry="depth: 0; 
+                height: 0.35" 
+                position="-0.02541 1.430 -1.993" 
+                class="not-clickable"
+                visible="false" 
+                animation__mouseenter="dur: 100; property: material.color; startEvents: mouseenter; to: #89B4F9" 
+                animation__mouseleave="dur: 100; property: material.color; startEvents: mouseleave; to: #ff294d">
+            </a-entity>
+            <!-- end Difficulty Menu -->
+
+            <!-- environment -->
+            <a-entity id="tv" rotation="0 119.99999999999999 1" position="7.14545 -0.91951 -0.46476">
+                <a-entity geometry="" position="2.49982 1.31434 -2.298" scale="1 0.8 0.5" rotation="0 -38 0" material="alphaTest: 1; flatShading: true; color: #858585; fog: false; displacementBias: 0; displacementTextureRepeat: 0.5 1; envMap: #grasslightbignm; metalness: 1; metalnessMap: #grasslightbignm; metalnessTextureOffset: 1.29 -0.08; metalnessTextureRepeat: -0.29 1; roughness: 0.23; roughnessMap: #grasslightbignm; roughnessTextureRepeat: 0 1" id="screen"></a-entity>
+                <a-entity geometry="" position="2.46301 1.74723 -2.21343" rotation="0 -38 0" scale="1.3 0.15 0.8" id="lid" material="color: #eb81d9"></a-entity>
+                <a-entity geometry="" position="2.46301 0.83227 -2.21343" rotation="0 -38 0" scale="1.3 0.15 0.8" id="bottom" material="color: #eb81d9"></a-entity>
+                <a-entity geometry="" position="2.92238 1.2687 -1.85782" rotation="0 -38 -90" scale="1.01 0.15 0.8" id="side" material="color: #eb81d9"></a-entity>
+                <a-entity geometry="" position="1.99629 1.29825 -2.56473" rotation="0 -38 -90" scale="1.05 0.15 0.8" id="side-2" material="color: #eb81d9"></a-entity>
+                <a-entity geometry="primitive: sphere" position="2.6272 1.82012 -2.04009" scale="0.2 0.14 0.14" rotation="0 -38 0" id="arial base" material="color: #a696d3"></a-entity>
+                <a-entity position="2.66067 2.19819 -1.78015" geometry="" scale="0.03 0.8 0.03" rotation="32 0 0" material="color: #6e6e6e" id="arial"></a-entity>
+                <a-entity position="2.66403 2.18068 -2.23552" geometry="" scale="0.03 0.8 0.03" rotation="40 180 14.999999999999998" material="color: #6e6e6e" id="arial-2"></a-entity>
+            </a-entity>
+
+            <a-entity id="speaker1" rotation="0 -50 0" position="3.15051 0.77859 -2.71649">
+                <a-entity id="speakerBox" geometry="" position="0 0 0" rotation="0 0 0" scale="1 1.81 1" material="color: #0000d5"></a-entity>
+                <a-entity id="tweeter" geometry="primitive: circle; radius: 0.2" position="0 0.51232 0.52675" rotation="0 0 0" scale="1 1 1">
+                <a-entity id="tweeter-2" geometry="primitive: circle; radius: 0.17" position="0 0 0.01217" rotation="0 0 0" scale="1 1 1" material="color: #d38f9e"></a-entity>
+                </a-entity>
+                <a-entity id="speakerCircle" geometry="primitive: circle; radius: 0.35" position="0 -0.2621 0.53771" rotation="0 0 0" scale="1 1 1" material="color: #d28c5e">
+                <a-entity id="speakerCircle-2" geometry="primitive: circle; radius: 0.31" position="0 0 0.02724" rotation="0 0 0" scale="1 1 1" material="color: #f2e377"></a-entity>
+                <a-entity id="speakerCircle-3" geometry="primitive: circle; radius: 0.075" position="0 0 0.0531" rotation="0 0 0" scale="1 1 1" material="color: #c66217"></a-entity>
+                </a-entity>
+            </a-entity>
+
+            <a-entity id="tree" position="1.53362 0 -2.62487">
+                <a-entity id="stem" geometry="primitive: cylinder" position="-5.31803 2.36141 -2.15327" scale="0.15 5 0.15" material="color: #59372f"></a-entity>
+                <a-entity id="treeLine" position="-5.2906 3.19535 -1.41422" rotation="70 0 0"    geometry="" scale="0.08 0.08 4" material="color: #00ffff"></a-entity>
+                <a-entity id="treeLine-2" rotation="-70 0 0" geometry="" scale="0.08 0.08 4" position="-5.29049 3.20189 -2.87051" material="color: #990d79"></a-entity>
+                <a-entity id="treeLine-3" rotation="70 -90 0" geometry="" scale="0.08 0.08 4" position="-6.04987 3.1808 -2.12304" material="color: #1bc931"></a-entity>
+                <a-entity id="treeLine-4" rotation="70 90 90" geometry="" scale="0.08 0.08 4" position="-4.60763 3.21931 -2.13885" material="color: #b8861d"></a-entity>
+                <a-entity id="treeLine-5" rotation="70 -135 90" geometry="" scale="0.08 0.08 4" position="-5.82608 3.21931 -2.65796" material="color: #fd97e3"></a-entity>
+                <a-entity id="treeLine-6" rotation="70 -45 0" geometry="" scale="0.08 0.08 4" position="-5.81671 3.16531 -1.61466" material="color: #a6dc27"></a-entity>
+                <a-entity id="treeLine-7" rotation="70 45 0" geometry="" scale="0.08 0.08 4" position="-4.77 3.21477 -1.60865" material="color: #ff040b"></a-entity>
+                <a-entity id="treeLine-8" rotation="70 120 0" geometry="" scale="0.08 0.08 4" position="-4.70376 3.19278 -2.54265" material="color: #6f22cc"></a-entity>
+                
+            </a-entity>
+
+            <a-entity id="tree-2" position="-1.65097 0 1.17197">
+                <a-entity id="stem" geometry="primitive: cylinder" position="-5.31803 2.36141 -2.15327" scale="0.15 5 0.15" material="color: #59372f"></a-entity>
+                <a-entity id="treeLine" position="-5.2906 3.19535 -1.41422" rotation="70 0 0"    geometry="" scale="0.08 0.08 4" material="color: #00ffff"></a-entity>
+                <a-entity id="treeLine-2" rotation="-70 0 0" geometry="" scale="0.08 0.08 4" position="-5.29049 3.20189 -2.87051" material="color: #990d79"></a-entity>
+                <a-entity id="treeLine-3" rotation="70 -90 0" geometry="" scale="0.08 0.08 4" position="-6.04987 3.1808 -2.12304" material="color: #1bc931"></a-entity>
+                <a-entity id="treeLine-4" rotation="70 90 90" geometry="" scale="0.08 0.08 4" position="-4.60763 3.21931 -2.13885" material="color: #b8861d"></a-entity>
+                <a-entity id="treeLine-5" rotation="70 -135 90" geometry="" scale="0.08 0.08 4" position="-5.82608 3.21931 -2.65796" material="color: #fd97e3"></a-entity>
+                <a-entity id="treeLine-6" rotation="70 -45 0" geometry="" scale="0.08 0.08 4" position="-5.81671 3.16531 -1.61466" material="color: #a6dc27"></a-entity>
+                <a-entity id="treeLine-7" rotation="70 45 0" geometry="" scale="0.08 0.08 4" position="-4.77 3.21477 -1.60865" material="color: #ff040b"></a-entity>
+                <a-entity id="treeLine-8" rotation="70 120 0" geometry="" scale="0.08 0.08 4" position="-4.70376 3.19278 -2.54265" material="color: #6f22cc"></a-entity>
+                
+            </a-entity>
+
+            <a-entity id="tree-3" position="11.26186 0 0.54321">
+                <a-entity id="stem" geometry="primitive: cylinder" position="-5.31803 2.36141 -2.15327" scale="0.15 5 0.15" material="color: #59372f"></a-entity>
+                <a-entity id="treeLine" position="-5.2906 3.19535 -1.41422" rotation="70 0 0"    geometry="" scale="0.08 0.08 4" material="color: #00ffff"></a-entity>
+                <a-entity id="treeLine-2" rotation="-70 0 0" geometry="" scale="0.08 0.08 4" position="-5.29049 3.20189 -2.87051" material="color: #990d79"></a-entity>
+                <a-entity id="treeLine-3" rotation="70 -90 0" geometry="" scale="0.08 0.08 4" position="-6.04987 3.1808 -2.12304" material="color: #1bc931"></a-entity>
+                <a-entity id="treeLine-4" rotation="70 90 90" geometry="" scale="0.08 0.08 4" position="-4.60763 3.21931 -2.13885" material="color: #b8861d"></a-entity>
+                <a-entity id="treeLine-5" rotation="70 -135 90" geometry="" scale="0.08 0.08 4" position="-5.82608 3.21931 -2.65796" material="color: #fd97e3"></a-entity>
+                <a-entity id="treeLine-6" rotation="70 -45 0" geometry="" scale="0.08 0.08 4" position="-5.81671 3.16531 -1.61466" material="color: #a6dc27"></a-entity>
+                <a-entity id="treeLine-7" rotation="70 45 0" geometry="" scale="0.08 0.08 4" position="-4.77 3.21477 -1.60865" material="color: #ff040b"></a-entity>
+                <a-entity id="treeLine-8" rotation="70 120 0" geometry="" scale="0.08 0.08 4" position="-4.70376 3.19278 -2.54265" material="color: #6f22cc"></a-entity>
+                
+            </a-entity>
+            <!-- end environment -->
+
+
+        </a-entity>
+
+        <a-entity id="scene-game" visible="false">
+            <a-entity geometry="primitive: ring; radiusInner: 1.12; segmentsPhi: 10; segmentsTheta: 64; thetaLength: 360" material="color: #ff9494" id="StaticRing" position="0 1.5 -2"></a-entity>
+            <a-entity id="BeatSpawner" position="0 0 0" beat_spawner="dur_ticks: 50; counter: #counter" sound__song="positional: false; src: #song; autoplay: false"></a-entity>
+
+            <a-entity id="tunnelLine" geometry="" scale="0.08 0.08 200" material="color: #00ffff"></a-entity>
+            <a-entity id="tunnelLine-2" geometry="" scale="0.08 0.08 200" position="0 3 0" material="color: #990d79"></a-entity>
+            <a-entity id="tunnelLine-3" geometry="" scale="0.08 0.08 200" position="1.5 1.5 0" material="color: #1bc931"></a-entity>
+            <a-entity id="tunnelLine-4" geometry="" scale="0.08 0.08 200" position="-1.5 1.5 0" material="color: #b8861d"></a-entity>
+            <a-entity id="tunnelLine-5" geometry="" scale="0.08 0.08 200" position="1.25 0.5 0" material="color: #20b572"></a-entity>
+            <a-entity id="tunnelLine-6" geometry="" scale="0.08 0.08 200" position="-1.25 0.5 0" material="color: #a6dc27"></a-entity>
+            <a-entity id="tunnelLine-7" geometry="" scale="0.08 0.08 200" position="-1.25 2.5 0" material="color: #ff040b"></a-entity>
+            <a-entity id="tunnelLine-8" geometry="" scale="0.08 0.08 200" position="1.25 2.5 0" material="color: #6f22cc"></a-entity>
+            
+            <a-entity id="tv" rotation="0 90 1" position="-0.85541 1.01078 -0.2008">
+                <a-entity id="counter" rotation="0 -38 0" position="2.20619 1.25514 -1.9398" text__counter="align: center; value: 0" scale="10 10 10"></a-entity>
+                <a-entity geometry="" position="2.49982 1.31434 -2.298" scale="1 0.8 0.5" rotation="0 -38 0" material="alphaTest: 1; flatShading: true; color: #858585; displacementBias: 0; displacementTextureRepeat: 0.5 1; envMap: #grasslightbignm; fog: false; metalness: 1; metalnessTextureOffset: 1.29 -0.08; metalnessTextureRepeat: -0.29 1; roughness: 0.23; roughnessTextureRepeat: 0 1" id="screen"></a-entity>
+                <a-entity geometry="" position="2.46301 1.74723 -2.21343" rotation="0 -38 0" scale="1.3 0.15 0.8" id="lid" material="color: #eb81d9"></a-entity>
+                <a-entity geometry="" position="2.46301 0.83227 -2.21343" rotation="0 -38 0" scale="1.3 0.15 0.8" id="bottom" material="color: #eb81d9"></a-entity>
+                <a-entity geometry="" position="2.92238 1.2687 -1.85782" rotation="0 -38 -90" scale="1.01 0.15 0.8" id="side" material="color: #eb81d9"></a-entity>
+                <a-entity geometry="" position="1.99629 1.29825 -2.56473" rotation="0 -38 -90" scale="1.05 0.15 0.8" id="side-2" material="color: #eb81d9"></a-entity>
+                <a-entity geometry="primitive: sphere" position="2.6272 1.82012 -2.04009" scale="0.2 0.14 0.14" rotation="0 -38 0" id="arial base" material="color: #a696d3"></a-entity>
+                <a-entity position="2.66067 2.19819 -1.78015" geometry="" scale="0.03 0.8 0.03" rotation="32 0 0" material="color: #6e6e6e" id="arial"></a-entity>
+                <a-entity position="2.66403 2.18068 -2.23552" geometry="" scale="0.03 0.8 0.03" rotation="40 180 14.999999999999998" material="color: #6e6e6e" id="arial-2"></a-entity>
+            </a-entity>
+
+            <a-entity id="speaker1" rotation="0 -50 0" position="3.15051 0.77859 -2.71649">
+                <a-entity id="speakerBox" geometry="" position="0 0 0" rotation="0 0 0" scale="1 1.81 1" material="color: #0000d5"></a-entity>
+                <a-entity id="tweeter" geometry="primitive: circle; radius: 0.2" position="0 0.51232 0.52675" rotation="0 0 0" scale="1 1 1">
+                <a-entity id="tweeter-2" geometry="primitive: circle; radius: 0.17" position="0 0 0.01217" rotation="0 0 0" scale="1 1 1" material="color: #d38f9e"></a-entity>
+                </a-entity>
+                <a-entity id="speakerCircle" geometry="primitive: circle; radius: 0.35" position="0 -0.2621 0.53771" rotation="0 0 0" scale="1 1 1" material="color: #d28c5e">
+                <a-entity id="speakerCircle-2" geometry="primitive: circle; radius: 0.31" position="0 0 0.02724" rotation="0 0 0" scale="1 1 1" material="color: #f2e377"></a-entity>
+                <a-entity id="speakerCircle-3" geometry="primitive: circle; radius: 0.075" position="0 0 0.0531" rotation="0 0 0" scale="1 1 1" material="color: #c66217"></a-entity>
+                </a-entity>
+            </a-entity>
+
+            <a-entity id="speaker2" rotation="0 29.999999999999996 -90" position="-3.34311 0.32963 -2.82488">
+                <a-entity id="speakerBox" geometry="" scale="1 1.81 1" material="color: #0000d5"></a-entity>
+                <a-entity id="tweeter" geometry="primitive: circle; radius: 0.2" position="0 0.51232 0.52675">
+                <a-entity id="tweeter-2" geometry="primitive: circle; radius: 0.17" position="0 0 0.01217" material="color: #d38f9e"></a-entity>
+                </a-entity>
+                <a-entity id="speakerCircle" geometry="primitive: circle; radius: 0.35" position="0 -0.2621 0.53771" material="color: #d28c5e">
+                <a-entity id="speakerCircle-2" geometry="primitive: circle; radius: 0.31" position="0 0 0.02724" material="color: #f2e377"></a-entity>
+                <a-entity id="speakerCircle-3" geometry="primitive: circle; radius: 0.075" position="0 0 0.0531" material="color: #c66217"></a-entity>
+                </a-entity>
+            </a-entity>
+
+            <a-entity position="-3.06739 1.35967 -2.79813" geometry="" scale="0.2 1 0.2" material="color: #40ba2e" id="stand1"></a-entity>
+            <a-entity id="stand2" material="color: #2ea4cb" geometry="" position="-3.10165 0.69218 -2.89322" scale="0.5 0.5 0.5"></a-entity>
+        </a-entity>
+
+        <a-entity id="scene-over" visible="false">
+
+        </a-entity>
+
+    </a-scene>
+</body>
+</html>
