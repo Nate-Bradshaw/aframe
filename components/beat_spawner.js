@@ -117,7 +117,6 @@ AFRAME.registerComponent('beat_spawner', {
             
         this.elapsed = (THREE.AudioContext.getContext().currentTime - this.startedAt) * 1000; // convert to ms
 
-        console.log(this.beats.length)
         if(this.beatIndex == this.beats.length){
             this.mIsPlaying = false;
             return;

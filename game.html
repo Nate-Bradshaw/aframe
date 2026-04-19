@@ -18,30 +18,32 @@
         <!-- these will be global elements -->
         <a-sky color="#ECECEC" material="color: #17132f" id="sky"></a-sky>
 
-        <a-camera id="MainCam">
-            <a-entity
-                id="RingOver"
-                cursor="fuse: true; fuse-timeout = 1000"
-                raycaster="objects: .clickable"
-                position="0 0 -1"
-                
-                geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;"
-                material="color: green; shader: flat"
-                
-                animation__fusing="property: geometry.thetaLength; from: 360; to: 0; dur: 1500; startEvents: fusing; easing: linear"
-                animation__reset="property: geometry.thetaLength; to: 360; dur: 50; startEvents: mouseleave">
-
-                <!-- Outer ring -->
+        <a-entity id=camera-rig>
+            <a-camera id="MainCam">
                 <a-entity
-                id="RingUnder" 
-                geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-                material="color: white; shader: flat"
-                position="0 0 -0.0001">  
+                    id="RingOver"
+                    cursor="fuse: true; fuse-timeout = 1000"
+                    raycaster="objects: .clickable"
+                    position="0 0 -1"
+                    
+                    geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;"
+                    material="color: green; shader: flat"
+                    
+                    animation__fusing="property: geometry.thetaLength; from: 360; to: 0; dur: 1500; startEvents: fusing; easing: linear"
+                    animation__reset="property: geometry.thetaLength; to: 360; dur: 50; startEvents: mouseleave">
+
+                    <!-- Outer ring -->
+                    <a-entity
+                    id="RingUnder" 
+                    geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+                    material="color: white; shader: flat"
+                    position="0 0 -0.0001">  
+                    </a-entity>
                 </a-entity>
-            </a-entity>
-            <!-- this cursor is used to interact with the game, janky but works -->
-            <a-entity id="cursor" raycaster="objects: .beat" cursor__m="" position="0 0 -0.1" geometry="primitive: circle; radius: 0.001" scale="0.5 0.5 0.5"></a-entity>
-        </a-camera>
+                <!-- this cursor is used to interact with the game, janky but works -->
+                <a-entity id="cursor" raycaster="objects: .beat" cursor__m="" position="0 0 -0.1" geometry="primitive: circle; radius: 0.001" scale="0.5 0.5 0.5"></a-entity>
+            </a-camera>
+        </a-entity>
 
         <a-entity id="Floor" position="0 0 0" geometry="primitive: circle; radius: 2.5"  rotation="-90 0 0" material="color: #b6a3cd; flatShading: false; roughness: 0.5"></a-entity> geometry="primitive: circle; radius: 2.5"></a-entity>
         <a-entity id="Floor-2" geometry="primitive: circle; radius: 3" rotation="-90 0 0" material="color: #74549a" position="0 -0.12743 0"></a-entity>

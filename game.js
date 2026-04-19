@@ -40,11 +40,20 @@ window.addEventListener("load", () => {
     resetBtn.addEventListener("click", () => {
         //Get camera and access its look-controls
         const mainCam = document.querySelector('#MainCam');
+        const camRig = document.querySelector('#camera-rig');
         const lookControls = mainCam.components['look-controls'];
 
         if (lookControls) {
             // Reset horizontal rotation (left/right)
-            lookControls.yawObject.rotation.y = 0;
+            // 0 is forward
+            console.log(mainCam.getAttribute("rotation"))
+            console.log(camRig.getAttribute("rotation"))
+            yOffset = 0 - (mainCam.getAttribute("rotation").y + camRig.getAttribute("rotation").y)
+            console.log(yOffset)
+            console.log((camRig.getAttribute("rotation").y + yOffset)%360)
+            camRig.setAttribute("rotation", `0 ${(camRig.getAttribute("rotation").y + yOffset)%360} 0`)
+
+            //lookControls.yawObject.rotation.y = 0;
         }
     });
 
