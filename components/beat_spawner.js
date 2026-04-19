@@ -117,6 +117,7 @@ AFRAME.registerComponent('beat_spawner', {
             
         this.elapsed = (THREE.AudioContext.getContext().currentTime - this.startedAt) * 1000; // convert to ms
 
+        console.log(this.beats.length)
         if(this.beatIndex == this.beats.length){
             this.mIsPlaying = false;
             return;
@@ -191,7 +192,7 @@ AFRAME.registerComponent('beat_spawner', {
         }
 
         //beatarr = this.songObj.beatMapTimingTest;
-        beatarr = this.songObj.beatMapSkip;
+        // beatarr = this.songObj.beatMapSkip;
 
         beatarr.forEach((beat, index) => {
             const [delayNotes, angle] = beat;

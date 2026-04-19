@@ -54,8 +54,11 @@ window.addEventListener("load", () => {
     instructionbtn.addEventListener("click", () => {
         exampleMenu.setAttribute("visible", true);
         menuTxt.setAttribute("visible", true);
-        instructionTxt.setAttribute("visible", true);
-        menuImage.setAttribute("visible", true);
+        instructionTxt1.setAttribute("visible", true);
+        menuImage1.setAttribute("visible", true);
+        instructionTxt2.setAttribute("visible", true);
+        menuImage2.setAttribute("visible", true);
+        instructionTxt3.setAttribute("visible", true);
         exitTxt.setAttribute("visible", true);
         toggle_clickable(switchBtn, false);
         toggle_clickable(instructionbtn, false);
@@ -66,8 +69,11 @@ window.addEventListener("load", () => {
     exitBtn.addEventListener("click", () => {
         exampleMenu.setAttribute("visible", false);
         menuTxt.setAttribute("visible", false);
-        instructionTxt.setAttribute("visible", false);
-        menuImage.setAttribute("visible", false);
+        instructionTxt1.setAttribute("visible", false);
+        menuImage1.setAttribute("visible", false);
+        instructionTxt2.setAttribute("visible", false);
+        menuImage2.setAttribute("visible", false);
+        instructionTxt3.setAttribute("visible", false);
         easyTxt.setAttribute("visible", false);
         normalTxt.setAttribute("visible", false);
         hardTxt.setAttribute("visible", false);
@@ -151,12 +157,15 @@ function get_refs(){
     exampleMenu = document.querySelector("#example-menu")
     exitBtn = document.querySelector("#exit-button")
     menuTxt = document.querySelector("#menuText")
-    instructionTxt = document.querySelector("#gameInstructions")
+    instructionTxt1 = document.querySelector("#gamePara1")
+    instructionTxt2 = document.querySelector("#gamePara2")
+    instructionTxt3 = document.querySelector("#gamePara3")
     easyTxt = document.querySelector("#easyTxt")
     normalTxt = document.querySelector("#normalTxt")
     hardTxt = document.querySelector("#hardTxt")
     exitTxt = document.querySelector("#exitTxt")
-    menuImage = document.querySelector("#menuImage")
+    menuImage1 = document.querySelector("#menuImage1")
+    menuImage2 = document.querySelector("#menuImage2")
     easyBtn = document.querySelector("#easy")
     normalBtn = document.querySelector("#normal")
     hardBtn = document.querySelector("#hard")
@@ -183,8 +192,11 @@ function menu_scene_settup(){
 
     exampleMenu.setAttribute("visible", false);
     menuTxt.setAttribute("visible", false);
-    instructionTxt.setAttribute("visible", false);
-    menuImage.setAttribute("visible", false);
+    instructionTxt1.setAttribute("visible", false);
+    menuImage1.setAttribute("visible", false);
+    instructionTxt2.setAttribute("visible", false);
+    menuImage2.setAttribute("visible", false);
+    instructionTxt3.setAttribute("visible", false);
     easyTxt.setAttribute("visible", false);
     normalTxt.setAttribute("visible", false);
     hardTxt.setAttribute("visible", false);

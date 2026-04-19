@@ -177,22 +177,50 @@
             </a-box>
 
             <!-- How To Play Menu -->
-            <a-text id="gameInstructions"
-                value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                position="-1.44642 1.91139 -1.99643"
+            <a-text id="gamePara1" 
+                position="-1.44642 2.23938 -1.99643" 
                 align="center" 
                 color="#111" 
                 scale="0.4 0.5 1" 
                 text="align: left; 
+                value: KAVRRG is a rhythm game that is catered to be as accessible as possible. The game is played by glacing at musical notes as they approach a ring in time with the beats of the song.; width: 4.8"
+                visible="false">
+            </a-text>
+
+            <a-image id="menuImage1"  
+                position="0.97118 2.1392 -1.989" 
+                material="src: images/baseGame.png" 
+                geometry="height: 0.62; width: 0.8"
+                visible="false">
+            </a-image>
+
+            <a-text id="gamePara2" 
+                position="-0.48942 1.52962 -1.99643" 
+                align="center" 
+                color="#111" 
+                scale="0.4 0.5 1" 
+                text="align: left; 
+                value: Each beat will approach at a 45 degree angle to a section on the circle and will disappear once it has been &quot;hit&quot;, or fade away if not looked at in time.; 
                 width: 4.8"
                 visible="false">
             </a-text>
 
-            <a-image id="menuImage"
-                src="images/Kevin_Macleod.jpg"
-                position="0.979 1.979 -1.989"
+            <a-image id="menuImage2" 
+                position="-0.97304 1.54005 -1.989" 
+                material="src: images/beatApproach.png" 
+                geometry="height: 0.62; width: 0.8"
                 visible="false">
             </a-image>
+
+            <a-text id="gamePara3" 
+                position="-0.79496 1.08066 -1.99643" 
+                align="center" 
+                color="#111" 
+                scale="0.4 0.5 1" 
+                text="align: left; 
+                value: Be careful not to miss a beat and have fun!; width: 4.8"
+                visible="false">
+            </a-text>
             <!-- end How To Play Menu -->
 
             <!-- Difficulty Menu -->
