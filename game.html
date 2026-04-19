@@ -51,18 +51,23 @@
         <a-light type="ambient" intensity="0.9"></a-light>
 
             <!-- Button to reset roration to forward facing -->
-            <a-sphere id = "reset-btn"
-                position="0 -0.75 0" 
+            <a-sphere id="reset-btn" 
+                position="0 0.052 0" 
                 radius="1" 
-                color="#EF2D5E"
-                class="clickable"
-
-                animation__mouseenter="property: material.color; to: #F5819E; dur: 100; startEvents: mouseenter"
-                animation__mouseleave="property: material.color; to: #EF2D5E; dur: 100; startEvents: mouseleave">
+                color="#EF2D5E" 
+                class="clickable" 
+                animation__mouseenter="dur: 100; property: material.color; startEvents: mouseenter; to: #F5819E" 
+                animation__mouseleave="dur: 100; property: material.color; startEvents: mouseleave; to: #EF2D5E"
+                geometry="primitive: circle; radius: 1.64" 
+                rotation="-90 0 0">
             </a-sphere>
 
-            <a-entity id="forward_arrow"
-                geometry="primitive: plane" material="color: #ff0000" rotation="-90 0 0" position="0 0.00471 -0.49146" scale="0.06 1 1">
+            <a-entity id="forward_arrow" 
+                geometry="primitive: plane" 
+                material="color: #bcaeae" 
+                rotation="-90 0 0" 
+                position="0 0.05953 -1.15051" 
+                scale="0.06 1 1">
             </a-entity>
             <!-- end Button to reset roration to forward facing -->
 
